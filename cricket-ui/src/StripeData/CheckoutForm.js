@@ -5,11 +5,15 @@ import React, { useState } from "react";
 // import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
 
-const SECRET_KEY = process.env.PUBLIC_API_KEY;
-console.log(SECRET_KEY);
+// import logo
+// import AECC_LOGO.png from "./images/AECC_LOGO.png"; // with import
+
+// const PUBLISHABLE_KEY = process.env.PUBLIC_API_KEY;
+// console.log(SECRET_KEY);
 
 export const CheckoutForm = () => {
- const [product, setProduct] = useState({name: "T-Shirt", price: 10});
+
+ const [product, setProduct] = useState({name: "Jersey Medium", price: 40 });
  const priceForStripe = product.price*100;
 
 //  token function
@@ -26,7 +30,7 @@ export const CheckoutForm = () => {
                 }
             });
             if(response.status === 200){
-                // do react toast with success message
+                // toast with success message
                 console.log("Payment success")
             }
 
@@ -38,16 +42,23 @@ export const CheckoutForm = () => {
     }
 
   return (
-    <div>
-        <small>Payment GateWay!</small>
-        <p>
-            <span>product:</span>
+    <div style={{ maxWidth: 400, height: '90vh', maxHeight: '50vh', marginTop:'1em', padding: '0.5em',
+        float:'right', marginRight:'2em', borderRadius: '2%',
+        backgroundColor: 'rgb(250, 90, 40)', paddingRight: '10px', paddingLeft: '10px'}}>
+
+        <p><small style={{marginTop:'-0.5rem', color:'yellow'}}>Your small dontaion is a big support for AECC!</small></p>
+        <p><small style={{marginTop:'-0.5rem', color:'yellow'}}>As an appreciation, we will send you this jersy!</small></p>
+        <p style={{color:"Highlight"}}>
+            {/* <span>product:</span> */}
             {product.name}
         </p>
-        <p>
-            <span>price:</span>
-            {product.price}
+        <img src={require('../images/AECC_LOGO.png')} alt="sports logo" style={{height:"100px", width:"100px"}}/>
+        <p style={{color:'cyan'}}>
+            <span>Donation Amount:</span>
+            ${product.price}
         </p>
+        {/* <img src={"images/AECC_LOGO.png"} alt="sports logo" /> */}
+       
 
         {/* <StripeCheckout 
             stripeKey = 'pk_test_51M263tFERbVgkJsuJ7eyF1Zb0cJ6ATy5XrlpClHK4fLEuRYYqyKfYzhEjDdN2ay4MK7GowZvPNh7kAHYvU6DMFTj00OWmuVqU0'
@@ -60,7 +71,8 @@ export const CheckoutForm = () => {
 
         <StripeCheckout 
             stripeKey = 'pk_test_51M263tFERbVgkJsuJ7eyF1Zb0cJ6ATy5XrlpClHK4fLEuRYYqyKfYzhEjDdN2ay4MK7GowZvPNh7kAHYvU6DMFTj00OWmuVqU0'
-            label="PayNow"
+            // stripeKey={process.env.PUBLIC_API_KEY}
+            label="Pay Now"
             amount={priceForStripe}
             description={`Your total is $${product.price}`}
             name="Pay with card"
