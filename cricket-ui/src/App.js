@@ -1,3 +1,4 @@
+
 import './App.css';
 import React from "react";
 import StripeInfo from "./StripeData/StripeInfo";
@@ -29,11 +30,7 @@ const App = () => {
 
         <Footer />
         </div>
-      
-   
-    // </BrowserRouter>
-  );
-};
+  )
+}
 
 export default App;
-
