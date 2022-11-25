@@ -26,6 +26,9 @@ const NavLinks = () => {
             <NavLink to="/aboutUs">
                 <span className={styles.navItems}> About Us</span>
             </NavLink>
+            <NavLink to="/contactUs">
+                <span className={styles.navItems}> Contact Us</span>
+            </NavLink>
                 {/* <span className={styles.navItems}>Contact Us</span> */}
                 <span className={styles.navItems}><ContactUs /></span>
                 {/* <NavLink to='/signup'><SignUpFormInModal /></NavLink> */}

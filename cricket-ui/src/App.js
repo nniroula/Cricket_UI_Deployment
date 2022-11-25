@@ -54,6 +54,7 @@ const App = () => {
                 <Route path="/signup" element={<SignUpForm />} />
 
                 <Route path="/aboutUs" element={<AboutUs />} />
+                <Route path="/contactUs" element={<ContactUs />} />
 
 
                 {/* HOme page */}
