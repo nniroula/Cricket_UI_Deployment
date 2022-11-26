@@ -19,21 +19,26 @@ const NavLinks = () => {
              {/* <a href='/'>
                 <span className={styles.navItems}>Home</span>
             </a> */}
-            <NavLink to="/">Home</NavLink>
+            {/* <NavLink to="/">Home</NavLink> */}
+            {/* <NavLink to="/home">Home</NavLink> */}
+            <NavLink to="/games">Games</NavLink>
+            <NavLink to="/players">Players</NavLink>
             <NavLink to="/signup">Sign Up</NavLink>
 
                 {/* <span className={styles.navItems}>About Us</span> */}
             <NavLink to="/aboutUs">
                 <span className={styles.navItems}> About Us</span>
+                {/* About Us */}
             </NavLink>
             <NavLink to="/contactUs">
                 <span className={styles.navItems}> Contact Us</span>
+                 {/* Contact Us */}
             </NavLink>
                 {/* <span className={styles.navItems}>Contact Us</span> */}
-                <span className={styles.navItems}><ContactUs /></span>
+                {/* <span className={styles.navItems}><ContactUs /></span> */}
                 {/* <NavLink to='/signup'><SignUpFormInModal /></NavLink> */}
 
-
+            {/* <NavLink to="/games">View Games</NavLink> */}
                 <NavLink to="/trial"> 
                     Trial
                 </NavLink>

@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 
 const AboutUs = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
     const [show, setShow] = useState(true);
     const handleShow = () => {
         setShow(!show);

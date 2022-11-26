@@ -1,19 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import DisplayPlayers from './DisplayPlayers';
+import DisplayPlayers from '../components/DisplayPlayers';
+
+import { useNavigate } from 'react-router-dom';
 
 const FetchPlayers = () => {
     const [players, setPlayers] = useState({});
+    const [clicked, setClicked] = useState(false);
+    const navigate = useNavigate();
 
     const getAllPlayers = () =>{
          const url = 'http://localhost:3000/players';
         const playersData = axios.get(url).then((response) => {
             const data = response.data;
             setPlayers(data);
-            // data.map(player => {
-            //     const {first_name, last_name, playing_role, registered_date } = player;
-            // })
         }).catch(error => console.error(error));
+
+        navigate('/players');
+        setClicked(!clicked);
     }
 
     // when the page renders
@@ -22,8 +26,7 @@ const FetchPlayers = () => {
 //    }, []);
     return(
         <div>
-            <DisplayPlayers players={players} />
-            <button onClick={getAllPlayers}>Get Players in Display</button> 
+            {clicked ? <DisplayPlayers players={players} clicked={clicked} /> : <button onClick={getAllPlayers}>View Players</button> }
         </div>
     );
 }

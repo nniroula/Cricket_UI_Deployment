@@ -1,19 +1,18 @@
-import styles from '../stylesheet/DisplayPlayers.module.css';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 
 
-const DisplayPlayers = ({ players, clicked }) => {
-    const player = [];
-    for(let val in players){
-        player.push(players[val]);
+const DisplayGames = ({ games, clicked }) => {
+    const game = [];
+    for(let val in games){
+        game.push(games[val]);
     }
-
     // useEffect(() => {
-
     // }, [players])
+
+    // 
     const navigate = useNavigate(); 
     const [show, setShow] = useState(true);
     const handleShow = () => {
@@ -21,34 +20,36 @@ const DisplayPlayers = ({ players, clicked }) => {
         clicked = !clicked;
         navigate('/');
     }
-
     return(
-        <div className={styles.PlayersInfo}>
+        // <div className={styles.PlayersInfo}>
+        <div>
             <Modal
                 show={show}
                 backdrop="static"
                 keyboard={false}
             >
-            <Modal.Header>
-                <Modal.Title>Players</Modal.Title>
-            </Modal.Header>
+                <Modal.Header>
+                <Modal.Title>Upcoming Games</Modal.Title>
+                </Modal.Header>
             <Modal.Body>
+            {/*  */}
             <table>
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Playing Role</th>
-                        <th>Start Date</th>
+                        <th>Date</th>
+                        <th>Ground</th>
+                        <th>Against</th>
+                        <th>Time</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <td>{player.map(pl => <tr> {pl.first_name}</tr>)}</td> 
-                    <td>{player.map(pl => <tr> {pl.last_name}</tr>)}</td> 
-                    <td>{player.map(pl => <tr> {pl.playing_role}</tr>)}</td> 
-                    <td>{player.map(pl => <tr> {pl.registered_date}</tr>)}</td>
+                    <td>{game.map(match => <tr> {match.game_date}</tr>)}</td> 
+                    <td>{game.map(match => <tr> {match.venue}</tr>)}</td> 
+                    <td>{game.map(match => <tr> {match.opposition_team}</tr>)}</td> 
+                    <td>{game.map(match => <tr> {match.game_time}</tr>)}</td>
                 </tbody>
             </table>
+            {/*  */}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleShow}>Close</Button>
@@ -58,4 +59,4 @@ const DisplayPlayers = ({ players, clicked }) => {
     );
 }
 
-export default DisplayPlayers;
+export default DisplayGames;
