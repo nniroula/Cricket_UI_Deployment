@@ -7,8 +7,6 @@ import ContactUs from './ContactUs';
 import AboutUs from './AboutUs';
 
 import SignUpForm from './SignUpForm';
-import TrialComponent from './TrialComponent';
-
 
 
 const NavLinks = () => {
@@ -25,7 +23,8 @@ const NavLinks = () => {
             <NavLink to="/players">Players</NavLink>
             <NavLink to="/signup">Sign Up</NavLink>
 
-                {/* <span className={styles.navItems}>About Us</span> */}
+            <NavLink to="/admins">Admins</NavLink>
+
             <NavLink to="/aboutUs">
                 <span className={styles.navItems}> About Us</span>
                 {/* About Us */}
@@ -34,16 +33,9 @@ const NavLinks = () => {
                 <span className={styles.navItems}> Contact Us</span>
                  {/* Contact Us */}
             </NavLink>
-                {/* <span className={styles.navItems}>Contact Us</span> */}
-                {/* <span className={styles.navItems}><ContactUs /></span> */}
+          
                 {/* <NavLink to='/signup'><SignUpFormInModal /></NavLink> */}
-
-            {/* <NavLink to="/games">View Games</NavLink> */}
-                <NavLink to="/trial"> 
-                    Trial
-                </NavLink>
            
-        
                 <span className={styles.navItems}>Log In</span>
                 <span className={styles.navItems}>Log out</span>
   

@@ -3,16 +3,10 @@ import './App.css';
 import React from "react";
 import StripeInfo from "./StripeData/StripeInfo";
 import Header from './components/Header';
-// import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { BrowserRouter, Route, Routes, Switch } from 'react-router-dom';
-// import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
-import Navbar from './components/NavLinks';
-import DisplayPlayers from './api-services/FetchPlayers';
-import FetchPlayers from './api-services/FetchPlayers';
 import AboutUs from './components/AboutUs';
-// import Modal from './Modal';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,36 +14,26 @@ import ContactUs from './components/ContactUs';
 import SignUpForm from './components/SignUpForm';
 import SignUpFormInModal from './components/SignUpFormInModal';
 
-// trial component
-import TrialComponent from './components/TrialComponent';
 import Home from './components/Home';
 import DisplayGames from './components/DisplayGames';
 import FetchGames from './api-services/FetchGames';
 import Games from './components/Games';
 import Players from './components/Players';
+import Admins from './components/Admins';
 
 
 const App = () => {
     // const [allGames, setAllGames] = useState();
   return (
     <BrowserRouter>
-  
         <div className="App">
             <Header />
-            {/* <SignUpFormInModal /> */}
-            {/* <SignUpForm />  */}
-            {/* <DisplayPlayers /> */}
-            {/* <DisplayGames /> */}
-            {/* <Home /> */}
-            {/* <FetchGames /> */}
 
             <Routes>
 
                 {/* <StripeInfo />
                 <Menu />
-                <DisplayPlayers />
-                <AboutUs />
-                <ContactUs /> */}
+                */}
 
                 {/* <SignUpForm /> */}
 
@@ -57,19 +41,21 @@ const App = () => {
 
                 {/* <Route path="/signup" element={<SignUpFormInModal />} /> */}
                 {/* <Route path="signup" element={<SignUpForm/>} /> */}
-                {/* <Route path="signup" element={<h1>Helloe not working !!!!</h1>} /> */}
-                <Route path="/trial" element={<TrialComponent />} />
 
+         
                 <Route path="/signup" element={<SignUpForm />} />
-
                 <Route path="/aboutUs" element={<AboutUs />} />
                 <Route path="/contactUs" element={<ContactUs />} />
+                <Route path="/games" element={<Games />} />
+                <Route path="/players" element={<Players />} />
+
+        
+                <Route path="/admins" element={<Admins />} />
 
 
                 {/* HOme page */}
                 <Route path="/home" element={<Home />} />
-                <Route path="/games" element={<Games />} />
-                <Route path="/players" element={<Players />} />
+           
                 {/* <Route path="/games" element={<DisplayGames />} /> */}
                 {/* <Route path="/fetchedgames" element={<DisplayGames allGames={allGames} setAllGames={setAllGames}/>} /> */}
            
