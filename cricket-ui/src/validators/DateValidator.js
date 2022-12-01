@@ -1,5 +1,4 @@
 const currentDate = new Date();
-// const today = `${currentDate.getMonth()+1}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
 let day = currentDate.getDate();
 const month = currentDate.getMonth()+1;
