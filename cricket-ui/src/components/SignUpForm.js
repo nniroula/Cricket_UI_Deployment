@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
-import BCRYPT_WORK_FACTOR from './Constant';
+// import BCRYPT_WORK_FACTOR from './Constant';
+import {BCRYPT_WORK_FACTOR} from './Constant';
 import axios from 'axios';
 import UserValidator from '../validators/UserValidator';
 import CurrentDate from '../validators/DateValidator';
+import { SIGN_UP_ENDPOINT } from './Constant';
 
 
 const SignUpForm = () => {
     const navigate = useNavigate();
-    const BCRYPT_FACTOR = BCRYPT_WORK_FACTOR();
+    const BCRYPT_FACTOR = BCRYPT_WORK_FACTOR;
     const [hasAnyInputError, setHasAnyInputError] = useState(false);
     const [inputError, setInputError] = useState({});
     const today = CurrentDate();
@@ -52,6 +54,8 @@ const SignUpForm = () => {
         }else{
             try{
                 await axios.post('http://localhost:3000/users', user);
+                await axios.post(SIGN_UP_ENDPOINT , user);
+          
                 // navigate('/signupFormData'); // login page
                 navigate('/login'); // login page
             }catch(e){
@@ -71,7 +75,7 @@ const SignUpForm = () => {
                 <label htmlFor="firstname">First Name</label>
                 <input type="text" 
                     id="firstname" 
-                    placeholder="your first name" 
+                    placeholder="Enter your first name" 
                     value={formData.first_name} 
                     name="first_name" // name attribute should be same as the state variable
                     onChange={handleChange} 
@@ -86,7 +90,7 @@ const SignUpForm = () => {
                 <label htmlFor="lastName">Last Name</label>
                 <input type="text" 
                     id="lastName" 
-                    placeholder="your last name" 
+                    placeholder="Enter your last name" 
                     value={formData.last_name} 
                     name="last_name"
                     onChange={handleChange} 
@@ -101,7 +105,7 @@ const SignUpForm = () => {
                 <label htmlFor="username">Username</label>
                 <input type="text" 
                     id="username" 
-                    placeholder="your name" 
+                    placeholder="Enter a username" 
                     value={formData.username} 
                     name="username" 
                     onChange={handleChange} 
@@ -116,7 +120,7 @@ const SignUpForm = () => {
                 <label htmlFor="password">Password</label>
                 <input type="password" 
                     id="password" 
-                    placeholder="enter a password" 
+                    placeholder="Enter a password" 
                     value={formData.password} 
                     name="password" 
                     onChange={handleChange} 
@@ -129,7 +133,7 @@ const SignUpForm = () => {
                 <label htmlFor="email">Email</label>
                 <input type="email" 
                     id="email" 
-                    placeholder="your email" 
+                    placeholder="Enter your email" 
                     value={formData.email} 
                     name="email" 
                     onChange={handleChange} 
@@ -142,7 +146,7 @@ const SignUpForm = () => {
                 <label htmlFor="phone_number">Phone</label>
                 <input type="text" 
                     id="phone_number" 
-                    placeholder="your phone number" 
+                    placeholder="Enter your phone number" 
                     value={formData.phone_number} 
                     name="phone_number" 
                     onChange={handleChange} 

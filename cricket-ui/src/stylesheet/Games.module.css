@@ -1,0 +1,19 @@
+.createGamesTD{
+    height: 32px;
+    width: fit-content;
+}
+table{
+    min-width: 30vw;
+}
+/* td{
+    height: 50px;
+} */
+
+/* table {
+    border-collapse: collapse;
+  } */
+
+/* td{
+    text-align: center;
+    height: 50px;
+} */
