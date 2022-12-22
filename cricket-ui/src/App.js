@@ -1,6 +1,6 @@
 
 import './App.css';
-import React from "react";
+import React, {useState} from "react";
 import StripeInfo from "./StripeData/StripeInfo";
 import Header from './components/Header';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -20,41 +20,42 @@ import FetchGames from './api-services/FetchGames';
 import Games from './components/Games';
 import Players from './components/Players';
 import Admins from './components/Admins';
+import LoginForm from './components/auth/LoginForm';
+import Logout from './components/auth/Logout';
+
+import AdminDashBoard from './components/AdminDashBoard';
 
 
 const App = () => {
     // const [allGames, setAllGames] = useState();
+    const [isAdmin, setIsAdmin] = useState();
   return (
     <BrowserRouter>
         <div className="App">
             <Header />
+              <StripeInfo />
 
             <Routes>
-
-                {/* <StripeInfo />
+                {/*
                 <Menu />
                 */}
-
-                {/* <SignUpForm /> */}
-
-                {/* <SignUpFormInModal /> */}
-
-                {/* <Route path="/signup" element={<SignUpFormInModal />} /> */}
-                {/* <Route path="signup" element={<SignUpForm/>} /> */}
-
-         
                 <Route path="/signup" element={<SignUpForm />} />
                 <Route path="/aboutUs" element={<AboutUs />} />
                 <Route path="/contactUs" element={<ContactUs />} />
+
                 <Route path="/games" element={<Games />} />
+                <Route path="/fetchGames" element={<FetchGames />} />
+
                 <Route path="/players" element={<Players />} />
 
-        
                 <Route path="/admins" element={<Admins />} />
 
+                <Route path="/login" element={<LoginForm />} />
+                <Route path="/logout" element={<Logout />} />
 
-                {/* HOme page */}
                 <Route path="/home" element={<Home />} />
+
+                <Route path="/adminDashBoard" element={<AdminDashBoard />} />
            
                 {/* <Route path="/games" element={<DisplayGames />} /> */}
                 {/* <Route path="/fetchedgames" element={<DisplayGames allGames={allGames} setAllGames={setAllGames}/>} /> */}

@@ -11,9 +11,9 @@ import NavLinks from './NavLinks';
  */
 const Header = () => (
   <div className={styles.Header}>
-    <div>
+    {/* <div>
       <span id={styles.HeaderText}>AECC</span>
-    </div>
+    </div> */}
     {/* <NavLink to="/patients">
       <span id={styles.PatientText}>Patients</span>
     </NavLink>

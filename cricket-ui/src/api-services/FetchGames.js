@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import DisplayGames from '../components/DisplayGames';
 import { useNavigate } from 'react-router-dom';
+import { RETRIEVE_GAMES_URL  } from '../components/Constant';
 
 
 const FetchGames = () => {
@@ -10,7 +11,8 @@ const FetchGames = () => {
     const navigate = useNavigate();
 
     const getAllGames = () => {
-        const url = 'http://localhost:3000/games';
+        // const url = 'http://localhost:3000/games';
+        const url = RETRIEVE_GAMES_URL ;
         const gamesData = axios.get(url).then((response) => {
             const data = response.data;
             setGames(data);
