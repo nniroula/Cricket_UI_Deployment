@@ -3,10 +3,15 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import logInTracker from './auth/loginTracker';
-
 import CreateGames from './games/CreateGames';
 import styles from '../stylesheet/Games.module.css';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { GAMES_ENDPOINT } from './Constant';
+import axios from 'axios';
 
+
+// npm install @mui/icons-material
 
 const DisplayGames = ({ games, clicked }) => {
     const game = [];
@@ -36,25 +41,35 @@ const DisplayGames = ({ games, clicked }) => {
     }
 
     useEffect(() => {
-        // const loggedInUser = localStorage.getItem('loggedInUser');
         const loggedInUser = signedInUser;
-     
         if (loggedInUser) {
-            // isSignedIn = JSON.parse(loggedInUser).is_admin;
             isSignedIn = loggedInUser.is_admin;
         }
     }, [signedInUser]);
 // }, [isSignedIn]);
 
     const addGame = () => {
-        console.log("add game");
         setCalled(!called);
-    //    <CreateGames />;
-    //    console.log("add game again");
-
-    //    return <CreateGames />;
     }
-    
+
+    const hanldeDelete = async (game) => {
+        const { id } = game;
+        let delete_url = GAMES_ENDPOINT/id;
+        const  jwt_token = signedInUser.jwt_token;
+        if(signedInUser != undefined && signedInUser.is_admin === true){
+            try{
+                await axios.delete(
+                    `http://localhost:3000/games/${id}`,
+                    {data: {
+                        'jwt_token': jwt_token
+                        },
+                    }
+                );
+            }catch(e){
+                console.log(e);
+            }
+        }
+    }
 
     return(
         // <div className={styles.PlayersInfo}>
@@ -95,7 +110,10 @@ const DisplayGames = ({ games, clicked }) => {
                                 <td>{game.map(match => <tr className={styles.createGamesTD}> {match.venue}</tr>)}</td> 
                                 <td>{game.map(match => <tr className={styles.createGamesTD}> {match.opposition_team}</tr>)}</td> 
                                 <td>{game.map(match => <tr className={styles.createGamesTD}> {match.game_time}</tr>)}</td>
-                                <td>{game.map(() => <tr> <button>delete</button><button>update</button></tr>)}</td>
+                                {/* <td>{game.map(() => <tr className={styles.createGamesTD}><button>delete</button><button>update</button></tr>)}</td> */}
+                                <td>{game.map((g) => <tr className={styles.createGamesTD}><button onClick={() => hanldeDelete(g)}><DeleteIcon /></button><button><EditIcon /></button></tr>)}</td>
+                       
+                             
                             </tbody>
                         </table>
                     </Modal.Body>
@@ -179,76 +197,3 @@ const DisplayGames = ({ games, clicked }) => {
 }
 
 export default DisplayGames;
-
-
-
-/*
-
-import React, { useState } from "react";
-import axios from "axios";
-
-const App = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState()
-
-  const handleSubmit = async e => {
-    
-  };
-
-/ if there's a user show the message below
-  if (user) {
-    return <div>{user.name} is loggged in</div>;
-  }
-
-  / if there's no user, show the login form
-  return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="username">Username: </label>
-      <input
-        type="text"
-        value={username}
-        placeholder="enter a username"
-        onChange={({ target }) => setUsername(target.value)}
-      />
-      <div>
-        <label htmlFor="password">password: </label>
-        <input
-          type="password"
-          value={password}
-          placeholder="enter a password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type="submit">Login</button>
-    </form>
-  );
-};
-
-export default App;
-
-
-const handleSubmit = async e => {
-  e.preventDefault();
-  const user = { username, password };
-  / send the username and password to the server
-  const response = await axios.post(
-    "http://blogservice.herokuapp.com/api/login",
-    user
-  );
-  / set the state of the user
-  setUser(response.data)
-  / store the user in localStorage
-  localStorage.setItem('user', response.data)
-  console.log(response.data)
-};
-
- useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
-    }
-  }, []);
-
-*/
