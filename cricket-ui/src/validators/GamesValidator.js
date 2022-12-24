@@ -6,7 +6,7 @@ const GamesValidator = (game) => {
     const time_regex = new RegExp("^([01]?[0-9]|2[0-3]):[0-5][0-9]$");
 
     if(!date_regex.test(game.game_date)){
-        errors.game_date = "Date format is 05/24/1987";
+        errors.game_date = "Date format is MM/DD/YYYY.";
     }
 
     if(game.venue.length < 3){
@@ -26,7 +26,7 @@ const GamesValidator = (game) => {
     }
 
     if(!time_regex.test(game.game_time)){
-        errors.game_time = "Use military time format";
+        errors.game_time = "Use military time format - 00:00";
     }
 
     return errors;
