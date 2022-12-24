@@ -42,9 +42,7 @@ const CreateGames = () => {
             setHasAnyInputError(true);
         }else{
             try{
-                // await axios.post('http://localhost:3000/users', user);
                 await axios.post(CREATE_GAMES_ENDPOINT, game);
-                // navigate('/'); // go to games table, fetch games
                 navigate('/fetchGames');
             }catch(e){
                 console.log(e);
@@ -54,7 +52,7 @@ const CreateGames = () => {
 
     const handleChange = (e) => {
         e.preventDefault();
-        setFormData(data => ({ ...data, [e.target.name]: e.target.value })); //es2015 computed Property names
+        setFormData(data => ({ ...data, [e.target.name]: e.target.value }));
     }
  
     return (
@@ -65,7 +63,7 @@ const CreateGames = () => {
                     id="gameDate" 
                     placeholder="Enter game" 
                     value={formData.game_date} 
-                    name="game_date" // name attribute should be same as the state variable
+                    name="game_date"
                     onChange={handleChange} 
                     required
                 />

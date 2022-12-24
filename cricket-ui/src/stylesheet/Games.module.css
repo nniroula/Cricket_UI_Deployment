@@ -1,41 +1,12 @@
 .createGamesTD{
-    /* height: 32px; */
     height: 34px;
     min-width:auto;
 }
 
-/* table{
-    min-width: 30vw;
-} */
-/* td{
-    height: 50px;
-} */
-
-/* table {
-    border-collapse: collapse;
-  } */
-
-/* td{
-    text-align: center;
-    height: 50px;
-} */
-
-/* table th{
-    min-width: 10vw;
-} */
-
-/* table tbody td{
-    min-width:fit-content;
-} */
-
-/* from createGames.js */
 .CreateGameButton{
     float: right;
     background-color: chartreuse;
-    /* margin:-20px */
     margin-top:-20px;
-    /* margin-bottom: -20px;
-    margin-bottom: 20px; */
 }
 
 .UpdateGameButton{

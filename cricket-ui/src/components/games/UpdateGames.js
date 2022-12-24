@@ -141,7 +141,6 @@ const UpdateGames = ({gameToBeUpdated}) => {
                 </div>
             </div>
 
-            {/* <button>Update</button> */}
             <button className={styles.UpdateGameButton}>Update</button>
         </form>
     );

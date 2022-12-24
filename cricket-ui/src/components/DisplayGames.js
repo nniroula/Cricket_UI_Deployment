@@ -12,8 +12,6 @@ import axios from 'axios';
 import UpdateGames from './games/UpdateGames';
 
 
-// npm install @mui/icons-material
-
 const DisplayGames = ({ games, clicked }) => {
     const navigate = useNavigate();
     const [show, setShow] = useState(true);
@@ -23,13 +21,11 @@ const DisplayGames = ({ games, clicked }) => {
 
     const signedInUser = logInTracker();
     let isSignedIn = false;
-
     const game = [];
+
     for(let val in games){
         game.push(games[val]);
     }
-
- 
 
     if(signedInUser != undefined){
         isSignedIn = signedInUser.is_admin;
@@ -42,13 +38,6 @@ const DisplayGames = ({ games, clicked }) => {
         clicked = !clicked;
         navigate('/');
     }
-
-    useEffect(() => {
-        const loggedInUser = signedInUser;
-        if (loggedInUser) {
-            isSignedIn = loggedInUser.is_admin;
-        }
-    }, [signedInUser]);
 
     const addGame = () => {
         setGameCreated(!gameCreated);
@@ -78,15 +67,19 @@ const DisplayGames = ({ games, clicked }) => {
 
     const hanldeUpdate = (game) => {
         const { id } = game;
-        console.log(id);
-        console.log(game);
         setGameUpdated(!gameUpdated);
         const  jwt_token = signedInUser.jwt_token;
         setGameToBeUpdate(game);
     }
 
+    useEffect(() => {
+        const loggedInUser = signedInUser;
+        if (loggedInUser) {
+            isSignedIn = loggedInUser.is_admin;
+        }
+    }, [signedInUser]);
+
     return(
-        // <div className={styles.PlayersInfo}>
         <>
             {isSignedIn ?     
                 <div>
@@ -112,13 +105,7 @@ const DisplayGames = ({ games, clicked }) => {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {/* <td>{game.map(match => <tr className={styles.createGamesTD}> {match.game_date}</tr>)}</td> 
-                                <td>{game.map(match => <tr className={styles.createGamesTD}> {match.venue}</tr>)}</td> 
-                                <td>{game.map(match => <tr className={styles.createGamesTD}> {match.opposition_team}</tr>)}</td> 
-                                <td>{game.map(match => <tr className={styles.createGamesTD}> {match.game_time}</tr>)}</td>
-                                <td>{game.map((g) => <tr className={styles.createGamesTD}><button onClick={() => hanldeDelete(g)}><DeleteIcon /></button><button><EditIcon /></button></tr>)}</td> */}
-
+                            <tbody>               
                                 <td>{game.map(match => <tr className={styles.createGamesTD}> {match.game_date}</tr>)}</td> 
                                 <td>{game.map(match => <tr className={styles.createGamesTD}> {match.venue}</tr>)}</td> 
                                 <td>{game.map(match => <tr className={styles.createGamesTD}> {match.opposition_team}</tr>)}</td> 
@@ -130,8 +117,6 @@ const DisplayGames = ({ games, clicked }) => {
                                     </tr>
                                     )}
                                 </td>
-                       
-                             
                             </tbody>
                         </table>
                     </Modal.Body>
