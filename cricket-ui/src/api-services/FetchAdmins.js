@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import DisplayGames from '../components/DisplayGames';
 import { useNavigate } from 'react-router-dom';
-import DisplayAdmins from '../components/DisplayAdmins';
+import DisplayAdmins from '../components/admins/DisplayAdmins';
 import { RETRIEVE_ADMINS_URL } from '../components/Constant';
 
 

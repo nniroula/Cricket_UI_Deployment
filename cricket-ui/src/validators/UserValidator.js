@@ -1,3 +1,5 @@
+import { RETRIEVE_ADMINS_URL } from "../components/Constant";
+
 const UserValidator = (user) => {
     const errors = {};
 
@@ -22,6 +24,9 @@ const UserValidator = (user) => {
     }else if(!username_regex.test(user.username)){
         errors.username = 'Contains only letters and numbers.';
     }
+    // else{
+    //     errors.username = 'Use different username.';
+    // }
 
     if(!phone_regex.test(user.phone_number)){
         errors.phone_number = "Phone format is 123-456-7890";

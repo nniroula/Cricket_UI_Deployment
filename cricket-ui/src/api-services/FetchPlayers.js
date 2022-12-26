@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import DisplayPlayers from '../components/DisplayPlayers';
+import DisplayPlayers from '../components/players/DisplayPlayers';
 import { RETRIEVE_PLAYERS_URL } from '../components/Constant';
 
 import { useNavigate } from 'react-router-dom';

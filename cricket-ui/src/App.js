@@ -15,15 +15,16 @@ import SignUpForm from './components/SignUpForm';
 import SignUpFormInModal from './components/SignUpFormInModal';
 
 import Home from './components/Home';
-import DisplayGames from './components/DisplayGames';
+import DisplayGames from './components/games/DisplayGames';
 import FetchGames from './api-services/FetchGames';
-import Games from './components/Games';
-import Players from './components/Players';
-import Admins from './components/Admins';
+import Games from './components/games/Games';
+import Players from './components/players/Players';
+import Admins from './components/admins/Admins';
 import LoginForm from './components/auth/LoginForm';
 import Logout from './components/auth/Logout';
+import FetchAdmins from './api-services/FetchAdmins';
 
-import AdminDashBoard from './components/AdminDashBoard';
+// import AdminDashBoard from './components/AdminDashBoard';
 
 
 const App = () => {
@@ -49,13 +50,14 @@ const App = () => {
                 <Route path="/players" element={<Players />} />
 
                 <Route path="/admins" element={<Admins />} />
+                <Route path="/fetchAdmins" element={<FetchAdmins />} />
 
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/logout" element={<Logout />} />
 
                 <Route path="/home" element={<Home />} />
 
-                <Route path="/adminDashBoard" element={<AdminDashBoard />} />
+                {/* <Route path="/adminDashBoard" element={<AdminDashBoard />} /> */}
            
                 {/* <Route path="/games" element={<DisplayGames />} /> */}
                 {/* <Route path="/fetchedgames" element={<DisplayGames allGames={allGames} setAllGames={setAllGames}/>} /> */}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import DisplayGames from '../components/DisplayGames';
+import DisplayGames from '../components/games/DisplayGames';
 import { useNavigate } from 'react-router-dom';
 import { RETRIEVE_GAMES_URL  } from '../components/Constant';
 
