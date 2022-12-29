@@ -1,6 +1,6 @@
 .createGamesTD{
-    height: 34px;
-    min-width:auto;
+    height: 32px;
+    overflow: hidden;
 }
 
 .CreateGameButton{
@@ -14,3 +14,63 @@
     background-color: chartreuse;
     margin-top:-20px;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: scroll;
+    white-space: nowrap;
+}
+tbody td {
+    overflow: scroll;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+td tr{
+    overflow: scroll;
+    height: 32px;
+    border-collapse: collapse;
+    white-space:nowrap;
+}
+th {
+    overflow: scroll;
+    height: 34px;
+    white-space: nowrap;
+    border-style: hidden;
+}
+
+.UpDelButtons{
+    border-collapse: collapse;
+    border-width: 0;
+    background-color: transparent;
+    white-space: nowrap;
+}
+
+th, td {
+  padding-top: 10px;
+}
+
+tbody tr:nth-child(even){
+    background-color: transparent;
+    padding: 10px; 
+}
+
+tbody tr:nth-child(odd){
+    background-color: transparent;
+    padding: 10px;
+}
+
+tbody td:nth-child(odd){
+    padding: 10px;
+    padding-left: 0px;
+    color:rgb(198, 10, 10);
+} 
+
+tbody td:nth-child(even){
+    padding: 10px;
+    padding-left: 0px;
+    color:blue;
+} 
+
+
+

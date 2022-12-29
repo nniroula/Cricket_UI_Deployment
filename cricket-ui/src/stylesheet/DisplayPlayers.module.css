@@ -3,10 +3,12 @@ th:nth-child(even) {
 }
 
 tr:nth-child(even) {
-    background-color: #82f9f9;
+    background: fixed;
+    background-color: #82f9f9; 
 }
 
 tr:nth-child(odd) {
+    background:fixed;
     background-color: lightgoldenrodyellow;
 }
 

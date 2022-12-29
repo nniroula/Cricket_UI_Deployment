@@ -21,10 +21,10 @@ const DisplayGames = ({ games, clicked }) => {
 
     const signedInUser = logInTracker();
     let isSignedIn = false;
-    const game = [];
+    const matches = [];
 
     for(let val in games){
-        game.push(games[val]);
+        matches.push(games[val]);
     }
 
     if(signedInUser != undefined){
@@ -106,14 +106,22 @@ const DisplayGames = ({ games, clicked }) => {
                                 </tr>
                             </thead>
                             <tbody>               
-                                <td>{game.map(match => <tr className={styles.createGamesTD}> {match.game_date}</tr>)}</td> 
-                                <td>{game.map(match => <tr className={styles.createGamesTD}> {match.venue}</tr>)}</td> 
-                                <td>{game.map(match => <tr className={styles.createGamesTD}> {match.opposition_team}</tr>)}</td> 
-                                <td>{game.map(match => <tr className={styles.createGamesTD}> {match.game_time}</tr>)}</td>
-                                <td>{game.map((g) => 
+                                <td>{matches.map(match => <tr> {match.game_date}</tr>)}</td> 
+                                <td>{matches.map(match => <tr> {match.venue}</tr>)}</td> 
+                                <td>{matches.map(match => <tr> {match.opposition_team}</tr>)}</td> 
+                                <td>{matches.map(match => <tr> {match.game_time}</tr>)}</td>
+                                {/* <td>{game.map((g) => 
                                     <tr className={styles.createGamesTD}>
                                         <button onClick={() => hanldeDelete(g)}><DeleteIcon /></button>
                                         <button onClick={() => hanldeUpdate(g)}><EditIcon /></button>
+                                    </tr>
+                                    )}
+                                </td> */}
+                                <td className={styles.createAdminTD}>{matches.map((match) => 
+                                    <tr className={styles.TDButtons}>
+
+                                        <button className={styles.UpDelButtons} onClick={() => hanldeDelete(match)}><DeleteIcon /></button>
+                                        <button className={styles.UpDelButtons} onClick={() => hanldeUpdate(match)}><EditIcon /></button>
                                     </tr>
                                     )}
                                 </td>
@@ -145,10 +153,10 @@ const DisplayGames = ({ games, clicked }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <td>{game.map(match => <tr> {match.game_date}</tr>)}</td> 
-                        <td>{game.map(match => <tr> {match.venue}</tr>)}</td> 
-                        <td>{game.map(match => <tr> {match.opposition_team}</tr>)}</td> 
-                        <td>{game.map(match => <tr> {match.game_time}</tr>)}</td>
+                        <td>{matches.map(match => <tr> {match.game_date}</tr>)}</td> 
+                        <td>{matches.map(match => <tr> {match.venue}</tr>)}</td> 
+                        <td>{matches.map(match => <tr> {match.opposition_team}</tr>)}</td> 
+                        <td>{matches.map(match => <tr> {match.game_time}</tr>)}</td>
                     </tbody>
                 </table>
                 </Modal.Body>
@@ -163,3 +171,16 @@ const DisplayGames = ({ games, clicked }) => {
 }
 
 export default DisplayGames;
+
+/*
+
+        <td className={styles.createAdminTD}> {adminUsers.map((admin) => 
+                            <tr className={styles.TDButtons}>
+                                <div className={styles.IconDiv}>
+                                <button className={styles.UpDelButtons} onClick={() => hanldeDelete(admin)}> <DeleteIcon /> </button>
+                                <button className={styles.UpDelButtons} onClick={() => hanldeUpdate(admin)}> <EditIcon /> </button>
+                                </div>
+                            </tr>
+                        )}
+                    </td> 
+*/
