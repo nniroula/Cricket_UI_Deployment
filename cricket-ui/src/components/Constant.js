@@ -12,6 +12,9 @@ const GAMES_ENDPOINT = 'http://localhost:3000/games';
 
 const RETRIEVE_ADMINS_URL = 'http://localhost:3000/users/admins';
 const CREATE_ADMIN_ENDPOINT = 'http://localhost:3000/users/admin';
+// http://localhost:3000/user/login  // login admin
+// http://localhost:3000/users/admin/8 delete admin
+// http://localhost:3000/users/admin/7 update admin
 
 
 const RETRIEVE_PLAYERS_URL = 'http://localhost:3000/players';

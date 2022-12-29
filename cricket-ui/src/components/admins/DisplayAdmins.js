@@ -1,33 +1,35 @@
-import styles from '../../stylesheet/DisplayPlayers.module.css';
+// import styles from '../../stylesheet/DisplayPlayers.module.css';
+import styles from '../../stylesheet/Admins.module.css';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import logInTracker from '../auth/loginTracker';
 import CreateAdmin from './CreateAdmins';
-
+import { CREATE_ADMIN_ENDPOINT } from '../Constant';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import axios from 'axios';
+import UpdateAdmins from './UpdateAdmins';
 
 
 const DisplayAdmins = ({ admins, clicked }) => {
     const adminUsers = [];
-
-    // 
     const [adminCreated, setAdminCreated] = useState(false);
-    const [gameUpdated, setGameUpdated] = useState(false);
-    const [gameToBeUpdated, setGameToBeUpdate] = useState({});
+    const [adminUpdated, setAdminUpdated] = useState(false);
+    const [adminToBeUpdated, setAdminToBeUpdate] = useState({});
 
     const signedInUser = logInTracker();
     let isSignedIn = false;
-    const game = [];
 
     if(signedInUser != undefined){
         isSignedIn = signedInUser.is_admin;
     }else{
         isSignedIn = false;
     }
-    // 
-    for(let val in admins){
-        adminUsers.push(admins[val]);
+    
+    for(let admin in admins){
+        adminUsers.push(admins[admin]);
     }
 
     const navigate = useNavigate(); 
@@ -40,6 +42,38 @@ const DisplayAdmins = ({ admins, clicked }) => {
 
     const addAdmin = () => {
         setAdminCreated(!adminCreated);
+    }
+
+    const hanldeDelete = async (admin) => {
+        const { id } = admin;
+        const delete_url = `${CREATE_ADMIN_ENDPOINT}/${id}`;
+        const  jwt_token = signedInUser.jwt_token;
+
+        if(admin.username !== signedInUser.username){console.log(admin);}
+
+        if(signedInUser != undefined && signedInUser.is_admin === true){
+            try{
+                await axios.delete(
+                    delete_url,
+                    {data: {
+                        'jwt_token': jwt_token
+                        },
+                    }
+                );
+                navigate('/fetchAdmins');
+            }catch(e){
+                console.log(e);
+            }
+        }
+        // else react toast, you cannot delete!
+    }
+
+
+    const hanldeUpdate = (admin) => {
+        if(admin.username === signedInUser.username){
+            setAdminUpdated(!adminUpdated);
+            setAdminToBeUpdate(admin);
+        }
     }
 
     return(
@@ -56,10 +90,8 @@ const DisplayAdmins = ({ admins, clicked }) => {
             </Modal.Header>
             <Modal.Body>
                 {adminCreated && <CreateAdmin />}
-                <button onClick={addAdmin}>Add Admin</button>
-                {/*     {gameUpdated && <UpdateGames gameToBeUpdated={gameToBeUpdated} />}
-                    {gameCreated && <CreateGames />}
-                        <button onClick={addGame}>Add Game</button> */}
+                <button onClick={addAdmin}>New Admin</button>
+                 {adminUpdated && <UpdateAdmins adminToBeUpdated={adminToBeUpdated} />}
             <table>
                 <thead>
                     <tr>
@@ -68,6 +100,7 @@ const DisplayAdmins = ({ admins, clicked }) => {
                         <th>Email Address</th>
                         <th>Phone Number</th>
                         <th>Start Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,7 +108,24 @@ const DisplayAdmins = ({ admins, clicked }) => {
                     <td>{adminUsers.map(admin => <tr> {admin.last_name}</tr>)}</td> 
                     <td>{adminUsers.map(admin => <tr> {admin.email}</tr>)}</td> 
                     <td>{adminUsers.map(admin => <tr> {admin.phone_number}</tr>)}</td>
-                    <td>{adminUsers.map(admin => <tr> {admin.start_date}</tr>)}</td>
+                    <td>{adminUsers.map(admin => <tr> {admin.start_date}</tr>)}</td>      
+                    {/* <td className={styles.createAdminTD}>{adminUsers.map((admin) => 
+                            <tr>
+                                <button onClick={() => hanldeDelete(admin)}> <DeleteIcon /> </button>
+                                <button onClick={() => hanldeUpdate(admin)}> <EditIcon /> </button>
+                            </tr>
+                        )}
+                    </td>  */}
+                    <td className={styles.createAdminTD}> {adminUsers.map((admin) => 
+                            // <tr className={styles.createAdminTD}>
+                            <tr className={styles.TDButtons}>
+                                <div className={styles.IconDiv}>
+                                <button className={styles.UpDelButtons} onClick={() => hanldeDelete(admin)}> <DeleteIcon /> </button>
+                                <button className={styles.UpDelButtons} onClick={() => hanldeUpdate(admin)}> <EditIcon /> </button>
+                                </div>
+                            </tr>
+                        )}
+                    </td> 
                 </tbody>
             </table>
             </Modal.Body>

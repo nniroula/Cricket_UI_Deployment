@@ -4,8 +4,53 @@
     margin-top:-20px;
 }
 
-/* .UpdateGameButton{
-    float: right;
-    background-color: chartreuse;
-    margin-top:-20px;
-} */
+.createAdminTD{
+    overflow: hidden;
+    white-space: nowrap;
+}
+.TDButtons{
+    height: 32px;
+    border-color: chartreuse;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    overflow: scroll;
+    white-space: nowrap;
+}
+
+tbody td {
+    overflow: scroll;
+}
+
+td tr{
+    overflow: scroll;
+    height: 32px;
+    border-collapse: collapse;
+}
+
+th {
+    overflow: scroll;
+    height: 34px;
+    white-space: nowrap;
+    border-style: hidden;
+}
+
+tbody tr {
+    border-collapse: collapse;
+    border-style: hidden;
+}
+
+.UpDelButtons{
+    border-color: white;
+    border-collapse: collapse;
+    border-width: 0;
+    background-color: transparent;
+}
+
+
+
+
+

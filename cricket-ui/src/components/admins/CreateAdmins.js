@@ -36,13 +36,14 @@ const CreateAdmin = () => {
     async function handleSubmit(evt){
         evt.preventDefault();
 
-        const hashedPassword = bcrypt.hashSync(formData.password, BCRYPT_FACTOR);
-
+        // const hashedPassword = bcrypt.hashSync(formData.password, BCRYPT_WORK_FACTOR);
+ 
         const user = {
             first_name: formData.first_name,
             last_name: formData.last_name,
             username: formData.username,
-            password: hashedPassword,
+            // password: hashedPassword,
+            password: formData.password,
             email: formData.email,
             phone_number: formData.phone_number,
             is_admin: TRUE,
@@ -178,7 +179,6 @@ const CreateAdmin = () => {
                 <label htmlFor="adminStatus">Admin</label>
                 <input type="text" 
                     id="adminStatus" 
-                    placeholder="Yes or No"
                     value={TRUE} 
                     name="is_admin"
                     onChange={handleChange}
