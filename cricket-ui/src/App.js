@@ -23,6 +23,7 @@ import Admins from './components/admins/Admins';
 import LoginForm from './components/auth/LoginForm';
 import Logout from './components/auth/Logout';
 import FetchAdmins from './api-services/FetchAdmins';
+import FetchPlayers from './api-services/FetchPlayers';
 
 // import AdminDashBoard from './components/AdminDashBoard';
 
@@ -48,6 +49,7 @@ const App = () => {
                 <Route path="/fetchGames" element={<FetchGames />} />
 
                 <Route path="/players" element={<Players />} />
+                <Route path="/fetchPlayers" element={<FetchPlayers />} />
 
                 <Route path="/admins" element={<Admins />} />
                 <Route path="/fetchAdmins" element={<FetchAdmins />} />

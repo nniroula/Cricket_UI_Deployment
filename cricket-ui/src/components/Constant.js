@@ -18,6 +18,8 @@ const CREATE_ADMIN_ENDPOINT = 'http://localhost:3000/users/admin';
 
 
 const RETRIEVE_PLAYERS_URL = 'http://localhost:3000/players';
+const PLAYERS_URL = 'http://localhost:3000/players'; // create player
+// http://localhost:3000/players/1 // delete player
 
 const SIGN_UP_ENDPOINT = 'http://localhost:3000/users';
 
@@ -30,5 +32,6 @@ export {BCRYPT_WORK_FACTOR,
     SIGN_UP_ENDPOINT,
     CREATE_GAMES_ENDPOINT,
     GAMES_ENDPOINT,
-    CREATE_ADMIN_ENDPOINT 
+    CREATE_ADMIN_ENDPOINT,
+    PLAYERS_URL
 };

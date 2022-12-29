@@ -49,7 +49,7 @@ const DisplayAdmins = ({ admins, clicked }) => {
         const delete_url = `${CREATE_ADMIN_ENDPOINT}/${id}`;
         const  jwt_token = signedInUser.jwt_token;
 
-        if(admin.username !== signedInUser.username){console.log(admin);}
+        // if(admin.username !== signedInUser.username){console.log(admin);}
 
         if(signedInUser != undefined && signedInUser.is_admin === true){
             try{
