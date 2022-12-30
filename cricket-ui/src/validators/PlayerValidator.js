@@ -1,36 +1,34 @@
-import { RETRIEVE_ADMINS_URL } from "../components/Constant";
+import { RETRIEVE_PLAYERS_URL } from "../components/Constant";
 import axios from "axios";
 import logInTracker from "../components/auth/loginTracker";
 
 const PlayerValidator = async (player) => {
     const errors = {};
-    let adminUsernames = [];
-    let adminEMails = [];
-    let adminData = [];
-    const loggedInUser = logInTracker();
-    let emailOfLoggedInUser = '';
+    let playerEMailsInDB = [];
+    let phoneInDB = '';
+    // const loggedInUser = logInTracker();
+  
 
-    const url = RETRIEVE_ADMINS_URL;
+    const url = RETRIEVE_PLAYERS_URL; 
     const names_regex = new RegExp("^[a-zA-Z]+$");
-    const username_regex = new RegExp("^[a-zA-Z]+$|^[a-zA-Z]+[0-9]+$");
-    const phone_regex =  new RegExp("^[1-9]\\d{2}-\\d{3}-\\d{4}$");
+    const phone_regex =  new RegExp("^[1-9]\\d{2}-\\d{3}-\\d{4}$");  // fix \\
+    const date_regex = new RegExp("^(1[0-2]|0[1-9])[/](3[01]|[12][0-9]|0[1-9])[/][0-9]{4}$");
+    const emergency_contact_regex = new RegExp("^[a-zA-Z]+$"); // work on this,, Not correct first lastname
+    const playing_role_regex = new RegExp("^[a-zA-Z]+$|^[a-zA-Z]+[\\s][a-zA-Z]+$"); // fix \\
 
+    // const venue_regex = new RegExp("^[a-zA-Z]+([\\s]?[a-zA-Z])*$");
+    // const opposition_team_regex = new RegExp("^[a-zA-Z]+([\\s]?[a-zA-Z])*$");
+    // 
     await axios.get(url).then((response) => {
         const data = response.data;
-        for(let adminUser in data){
-            adminData.push(data[adminUser]);
-            let user_name = data[adminUser].username;
-            let email_in_db = data[adminUser].email;
-            if(data[adminUser].email === player.email){
-                adminEMails.push(email_in_db);
+        for(let playerInDB in data){
+            let email_in_db = data[playerInDB].email;
+            if(data[playerInDB].email === player.email){
+                playerEMailsInDB.push(email_in_db);
             }
-            if(user_name === player.username){
-                adminUsernames.push(user_name);
+            if(data[playerInDB].phone_number === player.phone_number){
+                phoneInDB = data[playerInDB].phone_number;
             }
-            if(user_name === loggedInUser.username){
-                emailOfLoggedInUser = email_in_db;
-            }
-     
         }
     }).catch(error => console.error(error));
 
@@ -46,26 +44,31 @@ const PlayerValidator = async (player) => {
         errors.last_name = 'Contains only letters.';
     }
 
-    if(player.username.length < 2){
-        errors.username = "Minimum length is 2.";
-    }else if(!username_regex.test(player.username)){
-        errors.username = 'Letters followed by 0 or more numbers.';
-    }
-    else if ((loggedInUser.username !== player.username) && adminUsernames.includes(player.username)){
-        errors.username = 'Username is taken! Use a different one.';
+    if(playerEMailsInDB.includes(player.email)){
+        errors.email = "Email is taken! Use a different one."
     }
 
     if(!phone_regex.test(player.phone_number)){
         errors.phone_number = "Phone format is 123-456-7890";
+    }else if(phoneInDB){
+        errors.phone_number = "Phone is taken! Use different one.";
     }
 
-    if(((emailOfLoggedInUser !== player.email) && adminEMails.includes(player.email))){
-        errors.email = 'Email is taken! Use a different one.';
+    if(!date_regex.test(player.birth_date)){
+        errors.birth_date = "Date format is 05/24/1987";
     }
 
-    // if(!admin.password){
-    //     errors.password = "Invalid password. Can't update here";
-    // }
+    if(!date_regex.test(player.registered_date)){
+        errors.birth_date = "Date format is 05/24/1987";
+    }
+
+    if(!playing_role_regex.test(player.playing_role)){
+        errors.playing_role = 'Invalid input!';
+    }
+
+    if(!emergency_contact_regex.test(player.emergency_contact)){
+        errors.emergency_contact = 'Contains only letters.';
+    }
 
     return errors;
 }

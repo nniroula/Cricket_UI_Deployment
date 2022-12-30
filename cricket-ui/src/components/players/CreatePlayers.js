@@ -52,8 +52,12 @@ const CreatePlayers = () => {
             jwt_token: loggedInAdmin.jwt_token
         };
 
+        console.log(player);
+
         const validatorErrors = await PlayerValidator(player);
         const errorObjectKeysArray = Object.keys(validatorErrors);
+
+        console.log(validatorErrors);
 
         if(errorObjectKeysArray.length > 0){
             setInputError(validatorErrors);
@@ -61,7 +65,7 @@ const CreatePlayers = () => {
         }else{
             try{
                 await axios.post(PLAYERS_URL, player);
-                navigate("/fetchAdmins");
+                navigate("/fetchPlayers");
             }catch(e){
                 console.log(e);
             }
@@ -161,7 +165,9 @@ const CreatePlayers = () => {
                     onChange={handleChange} 
                     required
                 />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
+                <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                     {inputError.emergency_contact}
+                </div>
             </div>
 
             <div>
@@ -187,12 +193,12 @@ const CreatePlayers = () => {
             </div>
 
             <div>
-                <label htmlFor="start_date">Register Date</label>
+                <label htmlFor="start_date">Registered Date</label>
                 <input type="text" 
                     id="start_date" 
                     placeholder="mm/dd/yyyy"
                     value={today} 
-                    name="start_date"
+                    name="registered_date"
                     onChange={handleChange} 
                 />
                 <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
