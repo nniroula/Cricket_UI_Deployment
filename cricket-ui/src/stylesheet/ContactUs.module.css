@@ -1,0 +1,21 @@
+.ContactUsContainer{
+    background-color:moccasin;
+}
+
+.ModalTitle{
+    color: green;
+    justify-content: center;
+    margin-left: 30%
+    
+}
+
+.AboutUsEmail{
+    color: brown;
+}
+
+.AboutUsPhone{
+    color:blue
+}
+.AboutUsSocialMedia{
+    color:darkorchid
+}
