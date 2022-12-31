@@ -1,8 +1,8 @@
-import styles from '../stylesheet/GeneralStyle.css';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
+import styles from '../stylesheet/ContactUs.module.css';
 
 const ContactUs = () => {
     const navigate = useNavigate();
@@ -13,29 +13,33 @@ const ContactUs = () => {
     }
     return (
         <div>
-            <Modal
+            <Modal 
                 show={show}
                 backdrop="static"
                 keyboard={false}
             >
-                <Modal.Header>
-                <Modal.Title>Use following information to contact us!</Modal.Title>
+                <Modal.Header className={styles.ContactUsContainer}>
+                <Modal.Title className={styles.ModalTitle}>Contact AECC!</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className={styles.ContactUsContainer}>
                     <div className={styles.AboutUsDiv}>
-                        <p className={styles.AboutUs}>
-                            You can email us at cricketaecc@gmail.com
+                        <p>Send us email at:     
+                            <span className={styles.AboutUsEmail}>
+                            cricketaecc@gmail.com
+                            </span>
                         </p>
+                    
                         <p>
-                            If want to directly talk to us, call us on the follwing number during the weekend, 8am - 5pm MST. 
-                            We are not available to pick up calls during the weekdays.
-                        
+                            Call us during weekend, 8am - 5pm MST at:  
+                            <span className={styles.AboutUsPhone}> 720-499-3220 </span>
                         </p>
-                        <p> Phone: 720-499-3220 </p>
-                        <p>You can also reach out us via Facebook Messanger. You can access it via the AECC Facebook Page.</p>
+                     
+                        <p>Connect with us via social media at:
+                        <span className={styles.AboutUsSocialMedia}>Facebook Messanger. You can access it via the AECC Facebook Page.</span>
+                        </p>
                     </div>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className={styles.ContactUsContainer}>
                     <Button variant="secondary" onClick={handleShow}>Close</Button>
                 </Modal.Footer>
             </Modal>

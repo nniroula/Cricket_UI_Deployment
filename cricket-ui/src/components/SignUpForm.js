@@ -14,7 +14,7 @@ const SignUpForm = () => {
     const BCRYPT_FACTOR = BCRYPT_WORK_FACTOR;
     const [hasAnyInputError, setHasAnyInputError] = useState(false);
     const [inputError, setInputError] = useState({});
-    const today = CurrentDate();
+    const today = CurrentDate(); 
     // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     // const loggedInAdmin = logInTracker();

@@ -1,16 +1,23 @@
-#Navlinks{
-    padding-top: -3rem;
-    padding-bottom: 3em;
-    
+.Navlinks{
+    float: right;
+    padding: 1.5em;
+    margin-right: 1em;
 }
-.navItems{
-    color: white;
-    /* border-radius: 3px;
-    color: aliceblue;
-    float: left;
-    height: 50px; */
- 
-    text-align: center;
-    font-size: larger;
-    margin: 8px;
-  }
+.Menu{
+    display: contents;
+    color: aqua;
+}
+.Authentication{
+    margin-right: 1.3rem;
+}
+.SignUp{
+    margin-right: 0.5em;
+}
+.SigningService{
+    color:greenyellow;
+    display: contents;
+}
+.MenuItems{
+    color: rgb(187, 0, 255);
+    display: contents;
+}

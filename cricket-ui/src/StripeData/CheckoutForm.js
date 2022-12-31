@@ -1,26 +1,19 @@
-
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import React, { useState } from "react";
-// import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-// import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
+// import styles from '../stylesheet/GeneralStyle.css';
 
-// import logo
-// import AECC_LOGO.png from "./images/AECC_LOGO.png"; // with import
-
-// const PUBLISHABLE_KEY = process.env.PUBLIC_API_KEY;
-// console.log(SECRET_KEY);
 
 export const CheckoutForm = () => {
 
- const [product, setProduct] = useState({name: "Jersey Medium", price: 40 });
- const priceForStripe = product.price*100;
-
-//  token function
+    const [product, setProduct] = useState({name: "Size: Medium", price: 40 });
+    const priceForStripe = product.price*100;
+    //  token function
     const payNow = async token => {
         try{
-            console.log("BEFORE THE LOCAL HOST URL-------");
-            // const response = await axios.post({
             const response = await axios({
                 url: 'http://localhost:3000/stripe/payment',
                 method:'post',
@@ -40,128 +33,54 @@ export const CheckoutForm = () => {
             console.log(e)
         }
     }
-
-  return (
-    <div style={{ maxWidth: 400, height: '90vh', maxHeight: '50vh', marginTop:'1em', padding: '0.5em',
-        float:'right', marginRight:'2em', borderRadius: '2%',
-        backgroundColor: 'rgb(250, 90, 40)', paddingRight: '10px', paddingLeft: '10px'}}>
-
-        <p><small style={{marginTop:'-0.5rem', color:'yellow'}}>Your small dontaion is a big support for AECC!</small></p>
-        <p><small style={{marginTop:'-0.5rem', color:'yellow'}}>As an appreciation, we will send you this jersy!</small></p>
-        <p style={{color:"Highlight"}}>
-            {/* <span>product:</span> */}
-            {product.name}
-        </p>
-        <img src={require('../images/AECC_LOGO.png')} alt="sports logo" style={{height:"100px", width:"100px"}}/>
-        <p style={{color:'cyan'}}>
-            <span>Donation Amount:</span>
-            ${product.price}
-        </p>
-        {/* <img src={"images/AECC_LOGO.png"} alt="sports logo" /> */}
-       
-
-        {/* <StripeCheckout 
-            stripeKey = 'pk_test_51M263tFERbVgkJsuJ7eyF1Zb0cJ6ATy5XrlpClHK4fLEuRYYqyKfYzhEjDdN2ay4MK7GowZvPNh7kAHYvU6DMFTj00OWmuVqU0'
-            label="PayNow"
-            amount={priceForStripe}
-            description={`your total is $ ${product.price}`}
-            name="Pay with card"
-            token={payNow}
-        /> */}
-
-        <StripeCheckout 
-            stripeKey = 'pk_test_51M263tFERbVgkJsuJ7eyF1Zb0cJ6ATy5XrlpClHK4fLEuRYYqyKfYzhEjDdN2ay4MK7GowZvPNh7kAHYvU6DMFTj00OWmuVqU0'
-            // stripeKey={process.env.PUBLIC_API_KEY}
-            label="Pay Now"
-            amount={priceForStripe}
-            description={`Your total is $${product.price}`}
-            name="Pay with card"
-            token={payNow}
-            billingAddress
-        />
-    </div>
-  );
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// workging version
-/*
-import React from "react";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import axios from "axios";
-
-export const CheckoutForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement),
-    });
-
-    if (!error) {
-        console.log("Token generated and the payment method is: ", paymentMethod);
-      try {
-        const { id } = paymentMethod;
-        const response = await axios.post(
-          "http://localhost:3000/stripe/payment",
-          {
-            amount: 999, // make this dynamic
-            id: id,
-            billing_details: {
-                address: {country: 'USA', line1: '1234 Main st', city: 'Denver', state: 'NY', postal_code: '00000'},
-                email: 'noemail@gmail.com',
-                name: 'Pabi L N',
-                phone: '123-456-7890'
-            },
-            card: {
-                last4: '1234'
-            }
-          }
-        );
-        console.log("Stripe 35 | data", response.data.success);
-        if (response.data.success) {
-          console.log("CheckoutForm.js 25 | payment successful!");
-        }
-      } catch (error) {
-        // console.log("CheckoutForm.js 28 | ", error);
-        console.log("CheckoutForm.js", error);
-      }
-    } else {
-      console.log(error.message);
+    const navigate = useNavigate(); 
+    const [show, setShow] = useState(true);
+    const handleShow = () => {
+        setShow(!show);
+        navigate('/');
     }
-  };
+    return (
+        <div>
+            <Modal
+                show={show}
+                backdrop="static"
+                keyboard={false}
+            >
+            <Modal.Header>
+            <Modal.Title style={{color:'green'}}>Your Purchase is Donation to Us!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <div style={{ maxWidth: '50vw', minWidth:'20vw', minHeight:'50vh', height: '70vh', 
+                maxHeight: '60vh', marginTop:'1em', padding: '0.5em', marginRight:'1em', borderRadius: '2%', 
+                marginLeft:'1em', backgroundColor: 'rgb(250, 90, 40)', paddingLeft: '10px'}}>
 
-  return (
-    <div style={{ maxWidth: 400, height: '15vh', maxHeight: '20vh', marginTop:'1em', padding: '0.5em',
-        backgroundColor: 'rgb(250, 90, 40)', paddingRight: '10px', paddingLeft: '10px'}}
-    >
-        <small style={{marginTop:'-0.5rem', color:'yellow'}}>Enter card credentials to make donation!</small>
-        <form onSubmit={handleSubmit} style={{ marginTop:'0.8rem', padding: '10px', backgroundColor:'green'}}>
-            <CardElement className="card" options={{ style: { base: { backgroundColor: "lightgrey"} },}}/>
-            <button style={{ backgroundColor:"green", color:'white', marginRight:'-.6rem', float: 'right', 
-                        marginTop: '1rem', border:'solid green 3px'}}
-            >Pay</button>
-        </form>
-    </div>
-  );
-};
-*/
+                <p><small style={{marginTop:'-0.7rem', color:'yellow', }}>Your small purchase is a big support for AECC!</small></p>
+                <p style={{color:"Highlight", textAlign:'center',  marginBottom:'0.25px', marginTop:'-1em'}}>
+                    {product.name}
+                </p>
+                <div style={{textAlign:'center'}}>
+                <img src={require('../images/aecc_jersey.jpeg')} alt="Jersey logo" style={{height:"16em", width:"12em"}}/>
+
+                </div>
+                    <p style={{color:'cyan', textAlign:'center',  marginBottom:'0.25px'}}>
+                    <span>Amount:</span>
+                    ${product.price}
+                </p>
+                <StripeCheckout 
+                stripeKey = 'pk_test_51M263tFERbVgkJsuJ7eyF1Zb0cJ6ATy5XrlpClHK4fLEuRYYqyKfYzhEjDdN2ay4MK7GowZvPNh7kAHYvU6DMFTj00OWmuVqU0'
+                label="Pay Now"
+                amount={priceForStripe}
+                description={`Your total is $${product.price}`}
+                name="Pay with card"
+                token={payNow}
+                billingAddress
+            />
+            </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleShow}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+    );
+}
