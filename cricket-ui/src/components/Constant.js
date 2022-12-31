@@ -20,6 +20,7 @@ const CREATE_ADMIN_ENDPOINT = 'http://localhost:3000/users/admin';
 const RETRIEVE_PLAYERS_URL = 'http://localhost:3000/players';
 const PLAYERS_URL = 'http://localhost:3000/players'; // create player
 // http://localhost:3000/players/1 // delete player
+// http://localhost:3000/players/2 // update players
 
 const SIGN_UP_ENDPOINT = 'http://localhost:3000/users';
 

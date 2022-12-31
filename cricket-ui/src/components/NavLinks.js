@@ -8,35 +8,50 @@ import AboutUs from './AboutUs';
 
 import SignUpForm from './SignUpForm';
 
+import MenuIcon from '@mui/icons-material/Menu';
+
 
 const NavLinks = () => {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [navbarOpen, setNavbarOpen] = useState(false);
+
+    const closeMenu = () => {
+        setNavbarOpen(true)
+    }
+
+    const buttonToggle = () => {
+        setNavbarOpen(!navbarOpen)
+    }
 
     return (
         <div className={styles.Navlinks}>
-            <NavLink to="/admins">Admins</NavLink>
-            <NavLink to="/games">Games</NavLink>
-            <NavLink to="/players">Players</NavLink>
-
+          
+            {/* 
             <NavLink to="/aboutUs">
                 <span className={styles.navItems}> About Us</span>
             </NavLink>
-            <NavLink to="/contactUs">
-                <span className={styles.navItems}> Contact Us</span>
-            </NavLink>
-
-            {/* {loggedIn ? <NavLink to="/logout">Logout</NavLink>: 
-                <span>
-                <NavLink to="/login">Log In</NavLink> 
-                <NavLink to="/signup">Sign Up</NavLink> 
-                </span>
-            } */}
+          
+             */}
 
             <NavLink to="/signup"><span className={styles.navItems}>Sign Up</span></NavLink>
             <NavLink to="/login"><span className={styles.navItems}>Log In</span></NavLink>
             <NavLink to="/logout"><span className={styles.navItems}>Logout</span></NavLink> 
 
-            <NavLink to="/adminDashBoard">Admin Dash Board</NavLink>
+            <button onClick={buttonToggle}> {navbarOpen ? 
+                <div>
+                    <MenuIcon />
+                    <div><NavLink to="/admins">Admins</NavLink> </div>
+                    <div><NavLink to="/games">Games</NavLink> </div>
+                    <div><NavLink to="/players">Players</NavLink> </div>
+
+                    <div><NavLink to="/aboutUs"> About Us </NavLink></div>
+                    <div><NavLink to="/contactUs"> Contact Us </NavLink></div>
+
+                    <div><NavLink to="/donation"> Donate </NavLink></div>
+                </div>
+                : <MenuIcon />}
+
+            </button>
 
             {/* <style jsx> {`
                 .navBar{

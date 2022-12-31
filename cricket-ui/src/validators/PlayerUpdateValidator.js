@@ -1,19 +1,19 @@
 import { RETRIEVE_PLAYERS_URL } from "../components/Constant";
 import axios from "axios";
 
-const PlayerValidator = async (player) => {
+
+const PlayerUpdateValidator = async (player) => {
     const errors = {};
     let playerEMailsInDB = [];
     let phoneInDB = '';
+    let allPlayers = [];
+  
     const url = RETRIEVE_PLAYERS_URL; 
-
     const names_regex = new RegExp("^[a-zA-Z]+$");
-    const phone_regex =  new RegExp("^[1-9]\\d{2}-\\d{3}-\\d{4}$");  
+    const phone_regex =  new RegExp("^[1-9]\\d{2}-\\d{3}-\\d{4}$");
     const date_regex = new RegExp("^(1[0-2]|0[1-9])[/](3[01]|[12][0-9]|0[1-9])[/][0-9]{4}$");
-    const playing_role_regex = new RegExp("^[a-zA-Z]+([\\s]?[a-zA-Z])*$");
+    const playing_role_regex = new RegExp("^[a-zA-Z]+$|^[a-zA-Z]+[\\s][a-zA-Z]+$"); 
     const emergency_contact_regex = new RegExp("^[a-zA-Z]+([\\s]?[a-zA-Z])*$");
-    // const email_regex = new RegExp("^[\w\.\-]+)@([\w\-]+)((\.(\w){2,6})+)$");
-    // const email_regex = new RegExp("^[\w\.\-]+)@([\w\-]+)((\.(\w){2,6})+)$");
     const email_regex = new RegExp("^([\\w.-]+)@([\\w-]+)((\\.(\\w){2,6})+)$");
 
     await axios.get(url).then((response) => {
@@ -22,10 +22,12 @@ const PlayerValidator = async (player) => {
             let email_in_db = data[playerInDB].email;
             if(data[playerInDB].email === player.email){
                 playerEMailsInDB.push(email_in_db);
+                console.log(`Id is ${data[playerInDB].id}`);
             }
             if(data[playerInDB].phone_number === player.phone_number){
                 phoneInDB = data[playerInDB].phone_number;
             }
+            allPlayers.push(data[playerInDB]);
         }
     }).catch(error => console.error(error));
 
@@ -40,17 +42,22 @@ const PlayerValidator = async (player) => {
     }else if(!names_regex.test(player.last_name)){
         errors.last_name = 'Contains only letters.';
     }
-
+    
     if(!email_regex.test(player.email)){
-        errors.email = "Invalid email format!"
-    }else if(playerEMailsInDB.includes(player.email)){
-        errors.email = "Email is taken! Use a different one."
+        errors.email = "Invalid email format!";
+    }else{
+        for(let emailAddress of playerEMailsInDB){
+            if(playerEMailsInDB.includes(player.email) && player.email !== emailAddress){
+                errors.email = "Email is taken! Use a different one."
+            }
+        }
     }
 
     if(!phone_regex.test(player.phone_number)){
         errors.phone_number = "Phone format is 123-456-7890";
-    }else if(phoneInDB){
-        errors.phone_number = "Phone is taken! Use different one.";
+  
+    } else if(phoneInDB && player.phone_number !== phoneInDB){
+        errors.phone_number = "Phone is taken! Use a different one."
     }
 
     if(!date_regex.test(player.birth_date)){
@@ -72,4 +79,4 @@ const PlayerValidator = async (player) => {
     return errors;
 }
 
-export default PlayerValidator;
+export default PlayerUpdateValidator;

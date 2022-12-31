@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import AdminUpdateValidator from '../../validators/AdminUpdateValidator';
-import { CREATE_ADMIN_ENDPOINT } from '../Constant';
+import PlayerUpdateValidator from '../../validators/PlayerUpdateValidator';
+import { PLAYERS_URL } from '../Constant';
 import logInTracker from '../auth/loginTracker';
 import styles from '../../stylesheet/Games.module.css';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-import CurrentDate from '../../validators/DateValidator';
+// import CurrentDate from '../../validators/DateValidator';
 
 
 // const UpdateGames = ({adminToBeUpdated}) => {
@@ -17,7 +17,7 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
     const [inputError, setInputError] = useState({});
 
     const loggedInAdmin = logInTracker();
-    const today = CurrentDate();  
+    // const today = CurrentDate();  
    
     const EXISTING_FORM_DATA  = {
         first_name: playerToBeUpdated.first_name,
@@ -28,7 +28,8 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
         emergency_contact: playerToBeUpdated.emergency_contact,
         profile_picture_url: playerToBeUpdated.profile_picture_url,
         playing_role: playerToBeUpdated.playing_role,
-        registered_date: today,
+        // registered_date: today,
+        registered_date: playerToBeUpdated.registered_date,
         jwt_token: loggedInAdmin.jwt_token
     };
 
@@ -82,8 +83,12 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
             newEmergencyContact = playerToBeUpdated.emergency_contact;
         }
 
-        if(formData.profile_picture_url !== undefined){
-            newProfilePictureURL = formData.profile_picture_url;
+        if(formData.profile_picture_url === undefined){
+            newProfilePictureURL = "";
+        }
+
+        else if(formData.profile_picture_url !== undefined){
+            newProfilePictureURL = formData.profile_picture_url || " ";
         }else{
             newProfilePictureURL = playerToBeUpdated.profile_picture_url;
         }
@@ -100,7 +105,7 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
             newBirthDate = playerToBeUpdated.birth_date;
         }
 
-        const updatedAdmin = {
+        const updatedPlayer = {
             first_name: newFirstName,
             last_name: newLastName,
             email: newEmail,
@@ -109,11 +114,13 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
             emergency_contact: newEmergencyContact,
             profile_picture_url: newProfilePictureURL,
             playing_role: newPlayingRole,
-            registered_date: today,
+            registered_date: newRegisteredDate,
             jwt_token: loggedInAdmin.jwt_token
         }
+
+        console.log(updatedPlayer);
      
-        const validatorErrors = await AdminUpdateValidator(updatedAdmin);
+        const validatorErrors = await PlayerUpdateValidator(updatedPlayer);
         const errorObjectKeysArray = Object.keys(validatorErrors);
        
         // console.log("error check in admin validator line 109");
@@ -124,8 +131,8 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
             setHasAnyInputError(true);
         }else{
             try{
-                await axios.put(`${CREATE_ADMIN_ENDPOINT}/${playerToBeUpdated.id}`, updatedAdmin);
-                navigate('/fetchAdmins');
+                await axios.put(`${PLAYERS_URL}/${playerToBeUpdated.id}`, updatedPlayer);
+                navigate('/fetchPlayers');
             }catch(e){
                 console.log("OOPS something wrong. Check Password!");
                 toast.error("Oops something wrong. Check Password!");
@@ -243,7 +250,7 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
                     onChange={handleChange} 
                 />
                 <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.emergency_contact}
+                     {inputError.profile_picture_url}
                 </div>
             </div>
 
@@ -270,6 +277,7 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
                     defaultValue={playerToBeUpdated.registered_date}
                     name="registered_date"
                     onChange={handleChange} 
+                    required
                 />
                 <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
             </div>

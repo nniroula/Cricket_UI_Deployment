@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import bcrypt from 'bcryptjs';
-import {BCRYPT_WORK_FACTOR} from '../Constant';
+// import {BCRYPT_WORK_FACTOR} from '../Constant';
 import axios from 'axios';
 import CurrentDate from '../../validators/DateValidator';
 import { PLAYERS_URL } from '../Constant';
@@ -12,12 +11,12 @@ import styles from '../../stylesheet/Admins.module.css';
 
 const CreatePlayers = () => {
     const navigate = useNavigate();
-    const BCRYPT_FACTOR = BCRYPT_WORK_FACTOR;
+    // const BCRYPT_FACTOR = BCRYPT_WORK_FACTOR;
     const [hasAnyInputError, setHasAnyInputError] = useState(false);
     const [inputError, setInputError] = useState({});
     const today = CurrentDate();
 
-    const TRUE = 'true';
+    // const TRUE = 'true';
     const loggedInAdmin = logInTracker();
    
     const INITIAL_FORM_DATA = {
@@ -57,7 +56,6 @@ const CreatePlayers = () => {
         const validatorErrors = await PlayerValidator(player);
         const errorObjectKeysArray = Object.keys(validatorErrors);
 
-        console.log(validatorErrors);
 
         if(errorObjectKeysArray.length > 0){
             setInputError(validatorErrors);
@@ -178,7 +176,9 @@ const CreatePlayers = () => {
                     name="profile_picture_url"
                     onChange={handleChange}
                 />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
+                <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                     {inputError.profile_picture_url}
+                </div>
             </div>
 
             <div>
@@ -189,7 +189,9 @@ const CreatePlayers = () => {
                     name="playing_role"
                     onChange={handleChange}
                 />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
+                <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                     {inputError.playing_role}
+                </div>
             </div>
 
             <div>
@@ -201,7 +203,9 @@ const CreatePlayers = () => {
                     name="registered_date"
                     onChange={handleChange} 
                 />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
+                <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                     {inputError.registered_date}
+                </div>
             </div>
 
             <button className={styles.CreateAdminButton}>Submit</button>
@@ -211,21 +215,3 @@ const CreatePlayers = () => {
 }
 
 export default CreatePlayers;
-
-/*
-
-    "first_name": "Opener", 
-    "last_name": "batter", 
-    "email": "ob@a.com", 
-    "birth_date": "05/24/1987", 
-    "phone_number": "123-133-1001", 
-    "emergency_contact": "Prinsy", 
-    "profile_picture_url": "",
-    "playing_role": "All Rounder", 
-    "registered_date": "10/14/2022",
-
- "jwt_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFhIiwiaXNfQWRtaW4iOnRydWUsImlhdCI6MTY2ODA4OTM0NH0.5NhtzyTE2Nwdkw54MDoulY17mpGyBSxXVcDJ16IeC20"
-}
-
-
-*/
