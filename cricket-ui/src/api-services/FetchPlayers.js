@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import DisplayPlayers from '../components/players/DisplayPlayers';
 import { RETRIEVE_PLAYERS_URL } from '../components/Constant';
-
 import { useNavigate } from 'react-router-dom';
+import styles from './../stylesheet/Admins.module.css';
 
 const FetchPlayers = () => {
     const [players, setPlayers] = useState({});
@@ -11,24 +11,20 @@ const FetchPlayers = () => {
     const navigate = useNavigate();
 
     const getAllPlayers = () =>{
-        //  const url = 'http://localhost:3000/players';
         const url = RETRIEVE_PLAYERS_URL;
-        const playersData = axios.get(url).then((response) => {
+            axios.get(url).then((response) => {
             const data = response.data;
             setPlayers(data);
         }).catch(error => console.error(error));
 
-        navigate('/players');
         setClicked(!clicked);
+        navigate('/fetchPlayers');
     }
 
-    // when the page renders
-//     useEffect(() => {
-//         getAllPlayers();
-//    }, []);
     return(
         <div>
-            {clicked ? <DisplayPlayers players={players} clicked={clicked} /> : <button onClick={getAllPlayers}>View Players</button> }
+            {clicked ? <DisplayPlayers players={players} clicked={clicked} /> 
+            : <button className={styles.ViewButtons} onClick={getAllPlayers}>View Players</button> }
         </div>
     );
 }
