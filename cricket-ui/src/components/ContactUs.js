@@ -23,18 +23,17 @@ const ContactUs = () => {
                 </Modal.Header>
                 <Modal.Body className={styles.ContactUsContainer}>
                     <div className={styles.AboutUsDiv}>
-                        <p>Send us email at:     
+                        <p>Send us email at: &nbsp;&nbsp;    
                             <span className={styles.AboutUsEmail}>
                             cricketaecc@gmail.com
                             </span>
                         </p>
-                    
                         <p>
-                            Call us during weekend, 8am - 5pm MST at:  
+                            Call us during weekend, 8am - 5pm MST at:&nbsp;&nbsp;  
                             <span className={styles.AboutUsPhone}> 720-499-3220 </span>
                         </p>
                      
-                        <p>Connect with us via social media at:
+                        <p>Connect with us via social media at:&nbsp;&nbsp;
                         <span className={styles.AboutUsSocialMedia}>Facebook Messanger. You can access it via the AECC Facebook Page.</span>
                         </p>
                     </div>
