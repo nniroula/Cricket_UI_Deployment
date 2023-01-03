@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AdminUpdateValidator from '../../validators/AdminUpdateValidator';
 import { CREATE_ADMIN_ENDPOINT } from '../Constant';
 import logInTracker from '../auth/loginTracker';
-import styles from '../../stylesheet/Games.module.css';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
+import styles from '../../stylesheet/Admins.module.css';
 
 
-// const UpdateGames = ({adminToBeUpdated}) => {
 const UpdateAdmins = ({adminToBeUpdated}) => {
     const navigate = useNavigate();
     const [hasAnyInputError, setHasAnyInputError] = useState(false);
     const [inputError, setInputError] = useState({});
-
     const TRUE = 'true';
    
     const EXISTING_FORM_DATA  = {
@@ -36,7 +34,7 @@ const UpdateAdmins = ({adminToBeUpdated}) => {
         let newFirstName = '';
         let newLastName = '';
         let newUserName = '';
-        let newPassword = ''; // do not update password here
+        let newPassword = '';
         let newEmail = '';
         let newPhoneNumber = '';
         let newStartDate = '';
@@ -59,7 +57,6 @@ const UpdateAdmins = ({adminToBeUpdated}) => {
             newUserName = adminToBeUpdated.username;
         }
 
-        // password, do enter password to update info
         if(formData.password !== undefined){
             newPassword= formData.password;
         }else{
@@ -78,7 +75,6 @@ const UpdateAdmins = ({adminToBeUpdated}) => {
             newPhoneNumber = adminToBeUpdated.phone_number;
         }
 
-        // start date
         if(formData.start_date !== undefined){
             newStartDate = formData.start_date;
         }else{
@@ -95,7 +91,7 @@ const UpdateAdmins = ({adminToBeUpdated}) => {
             first_name: newFirstName,
             last_name: newLastName,
             username: newUserName,
-            password: newPassword, // do not update password here
+            password: newPassword,
             email: newEmail,
             phone_number: newPhoneNumber,
             start_date: newStartDate,
@@ -105,9 +101,6 @@ const UpdateAdmins = ({adminToBeUpdated}) => {
      
         const validatorErrors = await AdminUpdateValidator(updatedAdmin);
         const errorObjectKeysArray = Object.keys(validatorErrors);
-       
-        console.log("error check in admin validator line 109");
-        console.log(validatorErrors);
 
         if(errorObjectKeysArray.length > 0){
             setInputError(validatorErrors);
@@ -115,11 +108,9 @@ const UpdateAdmins = ({adminToBeUpdated}) => {
         }else{
             try{
                 await axios.put(`${CREATE_ADMIN_ENDPOINT}/${adminToBeUpdated.id}`, updatedAdmin);
-                navigate('/fetchAdmins');
+                navigate('/');
             }catch(e){
-                console.log("OOPS something wrong. Check Password!");
-                toast.error("Oops something wrong. Check Password!");
-                console.log(e);
+                toast.error("Oops something wrong. Refresh and try again!");
             }
         }
     }
@@ -243,13 +234,12 @@ const UpdateAdmins = ({adminToBeUpdated}) => {
                     onChange={handleChange} 
                     required
                 />
-                {/* <div style={{ color: 'red', marginBottom : '0.7em'}}></div> */}
                 <div style={{ color: 'red', marginBottom : '0.7em'}}>
                      {inputError.password}
                 </div>
             </div>
 
-            <button className={styles.CreateAdminButton}>Submit</button>
+            <button className={styles.UpdateButton}>Update</button>
         </form>
         </div>
         <ToastContainer />

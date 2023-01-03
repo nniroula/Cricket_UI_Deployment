@@ -10,6 +10,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import UpdateAdmins from './UpdateAdmins';
 import styles from '../../stylesheet/Admins.module.css';
+import {toast, ToastContainer} from 'react-toastify';      
+import 'react-toastify/dist/ReactToastify.css'; 
 
 
 const DisplayAdmins = ({ admins, clicked }) => {
@@ -57,12 +59,12 @@ const DisplayAdmins = ({ admins, clicked }) => {
                         },
                     }
                 );
-                navigate('/fetchAdmins');
+                navigate('/');
             }catch(e){
                 console.log(e);
             }
         }
-        // else react toast with message you cannot delete!
+        toast.error("You cannot delete yourself!");
     }
 
     const hanldeUpdate = (admin) => {
@@ -124,13 +126,8 @@ const DisplayAdmins = ({ admins, clicked }) => {
                 </div>
                 :
                 <div>
-                    <Modal
-                        show={show}
-                        backdrop="static"
-                        keyboard={false}
-                    >
+                    <Modal show={show} backdrop="static" keyboard={false}>
                     <Modal.Header>
-                        {/* <Modal.Title>Admins</Modal.Title> */}
                         <Modal.Title className={styles.ModalTitle}>Admins</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -157,7 +154,8 @@ const DisplayAdmins = ({ admins, clicked }) => {
                     </Modal> 
                 </div>
             }
-    </>
+            <ToastContainer />
+        </>
     );
 }
 
