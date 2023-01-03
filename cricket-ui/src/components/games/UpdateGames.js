@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import GamesValidator from '../../validators/GamesValidator';
@@ -67,7 +67,7 @@ const UpdateGames = ({gameToBeUpdated}) => {
         }else{
             try{
                 await axios.put(`${GAMES_ENDPOINT}/${gameToBeUpdated.id}`, updatedGame);
-                navigate('/fetchGames');
+                navigate('/');
             }catch(e){
                 console.log(e);
             }

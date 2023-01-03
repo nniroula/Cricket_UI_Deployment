@@ -4,12 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import logInTracker from '../auth/loginTracker';
 import CreateGames from './CreateGames';
-import styles from '../../stylesheet/Games.module.css';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { GAMES_ENDPOINT } from '../Constant';
 import axios from 'axios';
 import UpdateGames from './UpdateGames';
+import styles from '../../stylesheet/Games.module.css';
+import {toast, ToastContainer} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';   
 
 
 const DisplayGames = ({ games, clicked }) => {
@@ -18,7 +20,6 @@ const DisplayGames = ({ games, clicked }) => {
     const [gameCreated, setGameCreated] = useState(false);
     const [gameUpdated, setGameUpdated] = useState(false);
     const [gameToBeUpdated, setGameToBeUpdate] = useState({});
-
     const signedInUser = logInTracker();
     let isSignedIn = false;
     const matches = [];
@@ -57,18 +58,16 @@ const DisplayGames = ({ games, clicked }) => {
                         },
                     }
                 );
-                navigate('/fetchGames');
+                navigate('/');
             }catch(e){
                 console.log(e);
             }
         }
-        // else react toast, you cannot delete!
+        toast.error('You cannot delete game.');
     }
 
     const hanldeUpdate = (game) => {
-        const { id } = game;
         setGameUpdated(!gameUpdated);
-        const  jwt_token = signedInUser.jwt_token;
         setGameToBeUpdate(game);
     }
 
@@ -83,104 +82,76 @@ const DisplayGames = ({ games, clicked }) => {
         <>
             {isSignedIn ?     
                 <div>
-                    <Modal
-                        show={show}
-                        backdrop="static"
-                        keyboard={false}
-                    >
+                    <Modal show={show} backdrop="static" keyboard={false}>
                         <Modal.Header>
-                        <Modal.Title>Upcoming Games</Modal.Title>
+                        <Modal.Title className={styles.ModalTitle}>Upcoming Games</Modal.Title>
                         </Modal.Header>
-                    <Modal.Body>
-                    {gameUpdated && <UpdateGames gameToBeUpdated={gameToBeUpdated} />}
-                    {gameCreated && <CreateGames />}
-                        <button onClick={addGame}>Add Game</button>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Ground</th>
-                                    <th>Against</th>
-                                    <th>Time</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>               
-                                <td>{matches.map(match => <tr> {match.game_date}</tr>)}</td> 
-                                <td>{matches.map(match => <tr> {match.venue}</tr>)}</td> 
-                                <td>{matches.map(match => <tr> {match.opposition_team}</tr>)}</td> 
-                                <td>{matches.map(match => <tr> {match.game_time}</tr>)}</td>
-                                {/* <td>{game.map((g) => 
-                                    <tr className={styles.createGamesTD}>
-                                        <button onClick={() => hanldeDelete(g)}><DeleteIcon /></button>
-                                        <button onClick={() => hanldeUpdate(g)}><EditIcon /></button>
+                        <Modal.Body>
+                            {gameUpdated && <UpdateGames gameToBeUpdated={gameToBeUpdated} />}
+                            {gameCreated && <CreateGames />}
+                            <button onClick={addGame}>Add Game</button>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Ground</th>
+                                        <th>Against</th>
+                                        <th>Time</th>
+                                        <th>Actions</th>
                                     </tr>
-                                    )}
-                                </td> */}
-                                <td className={styles.createAdminTD}>{matches.map((match) => 
-                                    <tr className={styles.TDButtons}>
-
-                                        <button className={styles.UpDelButtons} onClick={() => hanldeDelete(match)}><DeleteIcon /></button>
-                                        <button className={styles.UpDelButtons} onClick={() => hanldeUpdate(match)}><EditIcon /></button>
-                                    </tr>
-                                    )}
-                                </td>
-                            </tbody>
-                        </table>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleShow}>Close</Button>
-                    </Modal.Footer>
+                                </thead>
+                                <tbody>               
+                                    <td>{matches.map(match => <tr> {match.game_date}</tr>)}</td> 
+                                    <td>{matches.map(match => <tr> {match.venue}</tr>)}</td> 
+                                    <td>{matches.map(match => <tr> {match.opposition_team}</tr>)}</td> 
+                                    <td>{matches.map(match => <tr> {match.game_time}</tr>)}</td>
+                                    <td className={styles.GamesTD}>{matches.map((match) => 
+                                        <tr className={styles.GamesTDButtons}>
+                                            <button className={styles.UpDelButtons} onClick={() => hanldeDelete(match)}><DeleteIcon /></button>
+                                            <button className={styles.UpDelButtons} onClick={() => hanldeUpdate(match)}><EditIcon /></button>
+                                        </tr>
+                                        )}
+                                    </td>
+                                </tbody>
+                            </table>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleShow}>Close</Button>
+                        </Modal.Footer>
                     </Modal> 
                 </div>:
                 <div>
-                <Modal
-                    show={show}
-                    backdrop="static"
-                    keyboard={false}
-                >
-                    <Modal.Header>
-                    <Modal.Title>Upcoming Games</Modal.Title>
-                    </Modal.Header>
-                <Modal.Body>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Ground</th>
-                            <th>Against</th>
-                            <th>Time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <td>{matches.map(match => <tr> {match.game_date}</tr>)}</td> 
-                        <td>{matches.map(match => <tr> {match.venue}</tr>)}</td> 
-                        <td>{matches.map(match => <tr> {match.opposition_team}</tr>)}</td> 
-                        <td>{matches.map(match => <tr> {match.game_time}</tr>)}</td>
-                    </tbody>
-                </table>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleShow}>Close</Button>
-                </Modal.Footer>
-                </Modal> 
+                    <Modal show={show} backdrop="static" keyboard={false}>
+                        <Modal.Header>
+                        <Modal.Title className={styles.ModalTitle}>Upcoming Games</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Ground</th>
+                                        <th>Against</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td>{matches.map(match => <tr> {match.game_date}</tr>)}</td> 
+                                    <td>{matches.map(match => <tr> {match.venue}</tr>)}</td> 
+                                    <td>{matches.map(match => <tr> {match.opposition_team}</tr>)}</td> 
+                                    <td>{matches.map(match => <tr> {match.game_time}</tr>)}</td>
+                                </tbody>
+                            </table>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleShow}>Close</Button>
+                        </Modal.Footer>
+                    </Modal> 
                 </div>
             }
+            <ToastContainer />
         </>
     );
 }
 
 export default DisplayGames;
-
-/*
-
-        <td className={styles.createAdminTD}> {adminUsers.map((admin) => 
-                            <tr className={styles.TDButtons}>
-                                <div className={styles.IconDiv}>
-                                <button className={styles.UpDelButtons} onClick={() => hanldeDelete(admin)}> <DeleteIcon /> </button>
-                                <button className={styles.UpDelButtons} onClick={() => hanldeUpdate(admin)}> <EditIcon /> </button>
-                                </div>
-                            </tr>
-                        )}
-                    </td> 
-*/
