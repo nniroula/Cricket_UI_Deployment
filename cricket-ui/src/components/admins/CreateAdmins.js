@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import bcrypt from 'bcryptjs';
-import {BCRYPT_WORK_FACTOR} from '../Constant';
 import axios from 'axios';
 import CurrentDate from '../../validators/DateValidator';
 import { CREATE_ADMIN_ENDPOINT } from '../Constant';
@@ -12,11 +10,9 @@ import styles from '../../stylesheet/Admins.module.css';
 
 const CreateAdmin = () => {
     const navigate = useNavigate();
-    const BCRYPT_FACTOR = BCRYPT_WORK_FACTOR;
     const [hasAnyInputError, setHasAnyInputError] = useState(false);
     const [inputError, setInputError] = useState({});
     const today = CurrentDate();
-
     const TRUE = 'true';
     const loggedInAdmin = logInTracker();
    
@@ -35,14 +31,11 @@ const CreateAdmin = () => {
 
     async function handleSubmit(evt){
         evt.preventDefault();
-
-        // const hashedPassword = bcrypt.hashSync(formData.password, BCRYPT_WORK_FACTOR);
  
         const user = {
             first_name: formData.first_name,
             last_name: formData.last_name,
             username: formData.username,
-            // password: hashedPassword,
             password: formData.password,
             email: formData.email,
             phone_number: formData.phone_number,
@@ -60,7 +53,7 @@ const CreateAdmin = () => {
         }else{
             try{
                 await axios.post(CREATE_ADMIN_ENDPOINT, user);
-                navigate("/fetchAdmins");
+                navigate("/");
             }catch(e){
                 console.log(e);
             }
@@ -130,7 +123,9 @@ const CreateAdmin = () => {
                     onChange={handleChange} 
                     required
                 />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
+                <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                     {inputError.password}
+                </div>
             </div>
 
             <div>
@@ -185,7 +180,6 @@ const CreateAdmin = () => {
                 />
                 <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
             </div>
-
             <button className={styles.CreateAdminButton}>Submit</button>
         </form>
         </div>
