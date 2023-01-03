@@ -154,7 +154,7 @@ const DisplayAdmins = ({ admins, clicked }) => {
                     </Modal> 
                 </div>
             }
-            <ToastContainer />
+            <ToastContainer />    
         </>
     );
 }

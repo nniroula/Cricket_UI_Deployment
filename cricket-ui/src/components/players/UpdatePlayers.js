@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PlayerUpdateValidator from '../../validators/PlayerUpdateValidator';
 import { PLAYERS_URL } from '../Constant';
 import logInTracker from '../auth/loginTracker';
-import styles from '../../stylesheet/Games.module.css';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-// import CurrentDate from '../../validators/DateValidator';
+import styles from '../../stylesheet/Players.module.css';
 
 
-// const UpdateGames = ({adminToBeUpdated}) => {
 const UpdatePlayers = ({playerToBeUpdated}) => {
     const navigate = useNavigate();
     const [hasAnyInputError, setHasAnyInputError] = useState(false);
     const [inputError, setInputError] = useState({});
-
-    const loggedInAdmin = logInTracker();
-    // const today = CurrentDate();  
+    const loggedInAdmin = logInTracker(); 
    
     const EXISTING_FORM_DATA  = {
         first_name: playerToBeUpdated.first_name,
@@ -28,7 +24,6 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
         emergency_contact: playerToBeUpdated.emergency_contact,
         profile_picture_url: playerToBeUpdated.profile_picture_url,
         playing_role: playerToBeUpdated.playing_role,
-        // registered_date: today,
         registered_date: playerToBeUpdated.registered_date,
         jwt_token: loggedInAdmin.jwt_token
     };
@@ -70,7 +65,7 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
         }else{
             newPhoneNumber = playerToBeUpdated.phone_number;
         }
-        // start date
+
         if(formData.registered_date !== undefined){
             newRegisteredDate = formData.registered_date;
         }else{
@@ -117,14 +112,9 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
             registered_date: newRegisteredDate,
             jwt_token: loggedInAdmin.jwt_token
         }
-
-        console.log(updatedPlayer);
      
         const validatorErrors = await PlayerUpdateValidator(updatedPlayer);
         const errorObjectKeysArray = Object.keys(validatorErrors);
-       
-        // console.log("error check in admin validator line 109");
-        // console.log(validatorErrors);
 
         if(errorObjectKeysArray.length > 0){
             setInputError(validatorErrors);
@@ -132,11 +122,9 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
         }else{
             try{
                 await axios.put(`${PLAYERS_URL}/${playerToBeUpdated.id}`, updatedPlayer);
-                navigate('/fetchPlayers');
+                navigate('/');
             }catch(e){
-                console.log("OOPS something wrong. Check Password!");
-                toast.error("Oops something wrong. Check Password!");
-                console.log(e);
+                toast.error("Oops something wrong. Refresh and try again.");
             }
         }
     }
@@ -282,7 +270,7 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
                 <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
             </div>
 
-            <button className={styles.CreateAdminButton}>Submit</button>
+            <button className={styles.UpdatePlayersButton}>Update</button>
         </form>
         </div>
         <ToastContainer />
