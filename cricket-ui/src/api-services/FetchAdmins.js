@@ -1,31 +1,27 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import DisplayAdmins from '../components/admins/DisplayAdmins';
 import { RETRIEVE_ADMINS_URL } from '../components/Constant';
+import styles from './../stylesheet/Admins.module.css';
 
 
 const FetchAdmins = () => {
     const [admins, setAdmins] = useState({});
     const [clicked, setClicked] = useState(false);
-    const navigate = useNavigate();
 
     const getAllAdmins = () => {
-        // const url = 'http://localhost:3000/users/admins';
         const url = RETRIEVE_ADMINS_URL
-        const adminsData = axios.get(url).then((response) => {
+        axios.get(url).then((response) => {
             const data = response.data;
             setAdmins(data);
         }).catch(error => console.error(error));
- 
-        // navigate('/games');
-        navigate('/admins');
-        setClicked(!clicked);
+        setClicked(!clicked); 
     }
 
     return (
         <div>
-            {clicked ? <DisplayAdmins admins={admins} clicked={clicked} /> : <button onClick={getAllAdmins}>View Admins</button> }
+            {clicked ? <DisplayAdmins admins={admins} clicked={clicked} /> : 
+            <button className={styles.ViewButtons} onClick={getAllAdmins}>View Admins</button> } 
         </div>
     )
 }
