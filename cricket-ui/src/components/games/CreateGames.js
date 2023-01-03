@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import GamesValidator from '../../validators/GamesValidator';
@@ -43,7 +43,7 @@ const CreateGames = () => {
         }else{
             try{
                 await axios.post(CREATE_GAMES_ENDPOINT, game);
-                navigate('/fetchGames');
+                navigate('/');
             }catch(e){
                 console.log(e);
             }
@@ -61,7 +61,7 @@ const CreateGames = () => {
                 <label htmlFor="gameDate">Game Date</label>
                 <input type="text" 
                     id="gameDate" 
-                    placeholder="Enter game" 
+                    placeholder="MM/DD/YYYY" 
                     value={formData.game_date} 
                     name="game_date"
                     onChange={handleChange} 
@@ -76,7 +76,7 @@ const CreateGames = () => {
                 <label htmlFor="ground">Venue</label>
                 <input type="text" 
                     id="ground" 
-                    placeholder="Enter ground" 
+                    placeholder="Enter ground name" 
                     value={formData.venue} 
                     name="venue"
                     onChange={handleChange} 
@@ -91,7 +91,7 @@ const CreateGames = () => {
                 <label htmlFor="opposition">Opposition Team</label>
                 <input type="text" 
                     id="opposition" 
-                    placeholder="Enter a opposition team" 
+                    placeholder="Opposition team name" 
                     value={formData.opposition_team} 
                     name="opposition_team" 
                     onChange={handleChange} 
@@ -106,7 +106,7 @@ const CreateGames = () => {
                 <label htmlFor="gameTime">Time</label>
                 <input type="text" 
                     id="gameTime" 
-                    placeholder="Enter game time" 
+                    placeholder="00:00" 
                     value={formData.game_time} 
                     name="game_time" 
                     onChange={handleChange} 
@@ -121,4 +121,5 @@ const CreateGames = () => {
         </form>
     );
 }
+
 export default CreateGames;
