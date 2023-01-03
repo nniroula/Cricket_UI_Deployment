@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import {BCRYPT_WORK_FACTOR} from '../Constant';
 import axios from 'axios';
 import CurrentDate from '../../validators/DateValidator';
 import { PLAYERS_URL } from '../Constant';
 import logInTracker from '../auth/loginTracker';
 import PlayerValidator from '../../validators/PlayerValidator';
-import styles from '../../stylesheet/Admins.module.css';
+import styles from '../../stylesheet/Players.module.css';
 
 
 const CreatePlayers = () => {
     const navigate = useNavigate();
-    // const BCRYPT_FACTOR = BCRYPT_WORK_FACTOR;
     const [hasAnyInputError, setHasAnyInputError] = useState(false);
     const [inputError, setInputError] = useState({});
     const today = CurrentDate();
-
-    // const TRUE = 'true';
     const loggedInAdmin = logInTracker();
    
     const INITIAL_FORM_DATA = {
@@ -35,8 +31,6 @@ const CreatePlayers = () => {
 
     async function handleSubmit(evt){
         evt.preventDefault();
-
-        // const hashedPassword = bcrypt.hashSync(formData.password, BCRYPT_WORK_FACTOR);
  
         const player = {
             first_name: formData.first_name,
@@ -51,11 +45,8 @@ const CreatePlayers = () => {
             jwt_token: loggedInAdmin.jwt_token
         };
 
-        console.log(player);
-
         const validatorErrors = await PlayerValidator(player);
         const errorObjectKeysArray = Object.keys(validatorErrors);
-
 
         if(errorObjectKeysArray.length > 0){
             setInputError(validatorErrors);
@@ -63,7 +54,7 @@ const CreatePlayers = () => {
         }else{
             try{
                 await axios.post(PLAYERS_URL, player);
-                navigate("/fetchPlayers");
+                navigate("/");
             }catch(e){
                 console.log(e);
             }
@@ -207,8 +198,7 @@ const CreatePlayers = () => {
                      {inputError.registered_date}
                 </div>
             </div>
-
-            <button className={styles.CreateAdminButton}>Submit</button>
+            <button className={styles.CreatePlayerButton}>Submit</button>
         </form>
         </div>
     );
