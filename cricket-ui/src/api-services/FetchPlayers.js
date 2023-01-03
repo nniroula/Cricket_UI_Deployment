@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import DisplayPlayers from '../components/players/DisplayPlayers';
-import { RETRIEVE_PLAYERS_URL } from '../components/Constant';
+import { PLAYERS_URL } from '../components/Constant';
 import styles from './../stylesheet/Admins.module.css';
 
 const FetchPlayers = () => {
@@ -9,7 +9,7 @@ const FetchPlayers = () => {
     const [clicked, setClicked] = useState(false);
 
     const getAllPlayers = () =>{
-        const url = RETRIEVE_PLAYERS_URL;
+        const url = PLAYERS_URL;
         axios.get(url).then((response) => {
             const data = response.data;
             setPlayers(data);

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import GamesValidator from '../../validators/GamesValidator';
-import { CREATE_GAMES_ENDPOINT } from '../Constant';
+// import { CREATE_GAMES_ENDPOINT } from '../Constant';
+import { GAMES_ENDPOINT } from '../Constant';
 import logInTracker from '../auth/loginTracker';
 import styles from '../../stylesheet/Games.module.css';
 
@@ -42,7 +43,7 @@ const CreateGames = () => {
             setHasAnyInputError(true);
         }else{
             try{
-                await axios.post(CREATE_GAMES_ENDPOINT, game);
+                await axios.post(GAMES_ENDPOINT, game);
                 navigate('/');
             }catch(e){
                 console.log(e);

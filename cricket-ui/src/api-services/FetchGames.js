@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import DisplayGames from '../components/games/DisplayGames';
-import { RETRIEVE_GAMES_URL  } from '../components/Constant';
+import { GAMES_ENDPOINT } from '../components/Constant';
 import styles from './../stylesheet/Admins.module.css';
 
 
@@ -10,7 +10,7 @@ const FetchGames = () => {
     const [clicked, setClicked] = useState(false);
 
     const getAllGames = () => {
-        const url = RETRIEVE_GAMES_URL ;
+        const url = GAMES_ENDPOINT;
         axios.get(url).then((response) => {
             const data = response.data;
             setGames(data);
