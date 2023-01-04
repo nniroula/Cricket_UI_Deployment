@@ -1,0 +1,35 @@
+th:nth-child(even) {
+    background-color: rgba(150, 212, 212, 0.4);
+}
+tbody{
+    background-color: rgb(189, 227, 242);
+}
+th{
+    background-color:rgb(241, 203, 190);
+}
+.PlayersInfo{
+    float: right;
+    background:dimgray;
+    margin-right: 3em;
+}
+.CreatePlayerButton{
+    float: right;
+    background-color: chartreuse;
+    margin-top:-20px;
+}
+.UpdatePlayersButton{
+    float: right;
+    background-color: chartreuse;
+    margin-bottom: 20px;
+}
+.UpDelButtons{
+    border-color: white;
+    border-collapse: collapse;
+    border-width: 0;
+    background-color: transparent;
+}
+.ModalTitle{
+    color: green;
+    justify-content: center;
+    margin-left: 40% ;
+}
