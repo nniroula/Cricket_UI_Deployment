@@ -135,146 +135,135 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
     }
  
     return (
-        <>
         <div>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="firstname">First Name</label>
-                <input type="text" 
-                    id="firstname" 
-                    value={formData.first_name} 
-                    defaultValue={playerToBeUpdated.first_name}
-                    name="first_name"
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                    {hasAnyInputError && inputError.first_name}
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="firstname">First Name</label>
+                    <input type="text" 
+                        id="firstname" 
+                        value={formData.first_name} 
+                        defaultValue={playerToBeUpdated.first_name}
+                        name="first_name"
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {hasAnyInputError && inputError.first_name}
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <label htmlFor="lastName">Last Name</label>
-                <input type="text" 
-                    id="lastName" 
-                    value={formData.last_name} 
-                    defaultValue={playerToBeUpdated.last_name}
-                    name="last_name"
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.last_name }
+                <div>
+                    <label htmlFor="lastName">Last Name</label>
+                    <input type="text" 
+                        id="lastName" 
+                        value={formData.last_name} 
+                        defaultValue={playerToBeUpdated.last_name}
+                        name="last_name"
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.last_name }
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <label htmlFor="email">Email</label>
-                <input type="email" 
-                    id="email" 
-                    value={formData.email} 
-                    defaultValue={playerToBeUpdated.email}
-                    name="email" 
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                    {inputError.email}
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <input type="email" 
+                        id="email" 
+                        value={formData.email} 
+                        defaultValue={playerToBeUpdated.email}
+                        name="email" 
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.email}
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <label htmlFor="birthDate">Birth Date</label>
-                <input type="birthDate" 
-                    id="birth_date" 
-                    value={formData.birth_date} 
-                    defaultValue={playerToBeUpdated.birth_date}
-                    name="birth_date" 
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                    {inputError.birth_date}
+                <div>
+                    <label htmlFor="birthDate">Birth Date</label>
+                    <input type="birthDate" 
+                        id="birth_date" 
+                        value={formData.birth_date} 
+                        defaultValue={playerToBeUpdated.birth_date}
+                        name="birth_date" 
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.birth_date}
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <label htmlFor="phone_number">Phone</label>
-                <input type="text" 
-                    id="phone_number" 
-                    value={formData.phone_number} 
-                    defaultValue={playerToBeUpdated.phone_number}
-                    name="phone_number" 
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.phone_number}
+                <div>
+                    <label htmlFor="phone_number">Phone</label>
+                    <input type="text" 
+                        id="phone_number" 
+                        value={formData.phone_number} 
+                        defaultValue={playerToBeUpdated.phone_number}
+                        name="phone_number" 
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.phone_number}
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <label htmlFor="emergency">Emergency Contact</label>
-                <input type="text" 
-                    id="emergency" 
-                    value={formData.emergency_contact} 
-                    defaultValue={playerToBeUpdated.emergency_contact}
-                    name="emergency_contact" 
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.emergency_contact}
+                <div>
+                    <label htmlFor="emergency">Emergency Contact</label>
+                    <input type="text" 
+                        id="emergency" 
+                        value={formData.emergency_contact} 
+                        defaultValue={playerToBeUpdated.emergency_contact}
+                        name="emergency_contact" 
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.emergency_contact}
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <label htmlFor="profile">Profile Picture</label>
-                <input type="text" 
-                    id="profile" 
-                    value={formData.profile_picture_url} 
-                    defaultValue={playerToBeUpdated.profile_picture_url}
-                    name="profile_picture_url" 
-                    onChange={handleChange} 
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.profile_picture_url}
+                <div>
+                    <label htmlFor="profile">Profile Picture</label>
+                    <input type="text" 
+                        id="profile" 
+                        value={formData.profile_picture_url} 
+                        defaultValue={playerToBeUpdated.profile_picture_url}
+                        name="profile_picture_url" 
+                        onChange={handleChange} 
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.profile_picture_url}
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <label htmlFor="playingRole">Playing Role</label>
-                <input type="text" 
-                    id="playingRole" 
-                    value={formData.playing_role} 
-                    defaultValue={playerToBeUpdated.playing_role}
-                    name="playing_role" 
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.playing_role}
+                <div>
+                    <label htmlFor="playingRole">Playing Role</label>
+                    <input type="text" 
+                        id="playingRole" 
+                        value={formData.playing_role} 
+                        defaultValue={playerToBeUpdated.playing_role}
+                        name="playing_role" 
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.playing_role}
+                    </div>
                 </div>
-            </div>
- 
-            <div>
-                <label htmlFor="start_date">Start Date</label>
-                <input type="text" 
-                    id="start_date" 
-                    value={formData.registered_date} 
-                    defaultValue={playerToBeUpdated.registered_date}
-                    name="registered_date"
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
-            </div>
-
-            <button className={styles.UpdatePlayersButton}>Update</button>
-        </form>
+                <div>
+                    <label htmlFor="start_date">Start Date</label>
+                    <input type="text" 
+                        id="start_date" 
+                        value={formData.registered_date} 
+                        defaultValue={playerToBeUpdated.registered_date}
+                        name="registered_date"
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
+                </div>
+                <button className={styles.UpdatePlayersButton}>Update</button>
+            </form>
+            <ToastContainer />
         </div>
-        <ToastContainer />
-        </>
     );
 }
 export default UpdatePlayers;

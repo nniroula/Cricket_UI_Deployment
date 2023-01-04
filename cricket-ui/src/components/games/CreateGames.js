@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import GamesValidator from '../../validators/GamesValidator';
-// import { CREATE_GAMES_ENDPOINT } from '../Constant';
 import { GAMES_ENDPOINT } from '../Constant';
 import logInTracker from '../auth/loginTracker';
 import styles from '../../stylesheet/Games.module.css';
@@ -35,7 +34,7 @@ const CreateGames = () => {
             jwt_token: loggedInCredentials.jwt_token
         }
 
-        const validatorErrors = GamesValidator(game);
+        const validatorErrors = await GamesValidator(game);
         const errorObjectKeysArray = Object.keys(validatorErrors);
 
         if(errorObjectKeysArray.length > 0){
@@ -57,69 +56,73 @@ const CreateGames = () => {
     }
  
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="gameDate">Game Date</label>
-                <input type="text" 
-                    id="gameDate" 
-                    placeholder="MM/DD/YYYY" 
-                    value={formData.game_date} 
-                    name="game_date"
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                    {hasAnyInputError && inputError.game_date}
-                </div>
+        <>
+            <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                {inputError.conflictedGame}
             </div>
-
-            <div>
-                <label htmlFor="ground">Venue</label>
-                <input type="text" 
-                    id="ground" 
-                    placeholder="Enter ground name" 
-                    value={formData.venue} 
-                    name="venue"
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.venue }
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="gameDate">Game Date</label>
+                    <input type="text" 
+                        id="gameDate" 
+                        placeholder="MM/DD/YYYY" 
+                        value={formData.game_date} 
+                        name="game_date"
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {hasAnyInputError && inputError.game_date}
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <label htmlFor="opposition">Opposition Team</label>
-                <input type="text" 
-                    id="opposition" 
-                    placeholder="Opposition team name" 
-                    value={formData.opposition_team} 
-                    name="opposition_team" 
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.opposition_team}
+                <div>
+                    <label htmlFor="ground">Venue</label>
+                    <input type="text" 
+                        id="ground" 
+                        placeholder="Enter ground name" 
+                        value={formData.venue} 
+                        name="venue"
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.venue }
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <label htmlFor="gameTime">Time</label>
-                <input type="text" 
-                    id="gameTime" 
-                    placeholder="00:00" 
-                    value={formData.game_time} 
-                    name="game_time" 
-                    onChange={handleChange} 
-                    required
-                />
-                   <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.game_time}
+                <div>
+                    <label htmlFor="opposition">Opposition Team</label>
+                    <input type="text" 
+                        id="opposition" 
+                        placeholder="Opposition team name" 
+                        value={formData.opposition_team} 
+                        name="opposition_team" 
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.opposition_team}
+                    </div>
                 </div>
-            </div>
 
-            <button className={styles.CreateGameButton}>Submit</button>
-        </form>
+                <div>
+                    <label htmlFor="gameTime">Time</label>
+                    <input type="text" 
+                        id="gameTime" 
+                        placeholder="00:00" 
+                        value={formData.game_time} 
+                        name="game_time" 
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.game_time}
+                    </div>
+                </div>
+                <button className={styles.CreateGameButton}>Submit</button>
+            </form>
+        </>
     );
 }
 

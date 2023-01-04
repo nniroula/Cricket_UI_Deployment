@@ -58,9 +58,12 @@ const UpdateGames = ({gameToBeUpdated}) => {
             jwt_token: loggedInCredentials.jwt_token
         }
      
-        const validatorErrors = GamesValidator(updatedGame);
-        const errorObjectKeysArray = Object.keys(validatorErrors);
+        const validatorErrors = await GamesValidator(updatedGame);
+        if(validatorErrors.conflictedGame){
+            delete validatorErrors.conflictedGame;
+        }
 
+        const errorObjectKeysArray = Object.keys(validatorErrors);
         if(errorObjectKeysArray.length > 0){
             setInputError(validatorErrors);
             setHasAnyInputError(true);
@@ -69,7 +72,8 @@ const UpdateGames = ({gameToBeUpdated}) => {
                 await axios.put(`${GAMES_ENDPOINT}/${gameToBeUpdated.id}`, updatedGame);
                 navigate('/');
             }catch(e){
-                console.log(e);
+                validatorErrors.conflictedGame = e.response.data.message;
+                setInputError(validatorErrors);
             }
         }
     }
@@ -80,69 +84,70 @@ const UpdateGames = ({gameToBeUpdated}) => {
     }
  
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="gameDate">Game Date</label>
-                <input type="text" 
-                    id="gameDate" 
-                    value={formData.game_date} 
-                    defaultValue={gameToBeUpdated.game_date}
-                    name="game_date"
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                    {hasAnyInputError && inputError.game_date}
-                </div>
+        <>
+            <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                {inputError.conflictedGame}
             </div>
-
-            <div>
-                <label htmlFor="ground">Venue</label>
-                <input type="text" 
-                    id="ground" 
-                    value={formData.venue} 
-                    defaultValue={gameToBeUpdated.venue}
-                    name="venue"
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.venue }
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="gameDate">Game Date</label>
+                    <input type="text" 
+                        id="gameDate" 
+                        value={formData.game_date} 
+                        defaultValue={gameToBeUpdated.game_date}
+                        name="game_date"
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {hasAnyInputError && inputError.game_date}
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <label htmlFor="opposition">Opposition Team</label>
-                <input type="text" 
-                    id="opposition" 
-                    value={formData.opposition_team}
-                    defaultValue={gameToBeUpdated.opposition_team}
-                    name="opposition_team" 
-                    onChange={handleChange} 
-                    required
-                />
-                <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.opposition_team}
+                <div>
+                    <label htmlFor="ground">Venue</label>
+                    <input type="text" 
+                        id="ground" 
+                        value={formData.venue} 
+                        defaultValue={gameToBeUpdated.venue}
+                        name="venue"
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.venue }
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <label htmlFor="gameTime">Time</label>
-                <input type="text" 
-                    id="gameTime" 
-                    value={formData.game_time} 
-                    defaultValue={gameToBeUpdated.game_time}
-                    name="game_time" 
-                    onChange={handleChange} 
-                    required
-                />
-                   <div style={{ color: 'red', marginBottom : '0.7em'}}>
-                     {inputError.game_time}
+                <div>
+                    <label htmlFor="opposition">Opposition Team</label>
+                    <input type="text" 
+                        id="opposition" 
+                        value={formData.opposition_team}
+                        defaultValue={gameToBeUpdated.opposition_team}
+                        name="opposition_team" 
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.opposition_team}
+                    </div>
                 </div>
-            </div>
-
-            <button className={styles.UpdateGameButton}>Update</button>
-        </form>
+                <div>
+                    <label htmlFor="gameTime">Time</label>
+                    <input type="text" 
+                        id="gameTime" 
+                        value={formData.game_time} 
+                        defaultValue={gameToBeUpdated.game_time}
+                        name="game_time" 
+                        onChange={handleChange} 
+                        required
+                    />
+                    <div style={{ color: 'red', marginBottom : '0.7em'}}>
+                        {inputError.game_time}
+                    </div>
+                </div>
+                <button className={styles.UpdateGameButton}>Update</button>
+            </form>
+        </>
     );
 }
 export default UpdateGames;
