@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {toast, ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';   
+import Home from '../Home';
+import { RETRIEVE_ADMINS_URL, LOGIN_ENDPOINT } from '../Constant';
 
 
 const LoginForm = () => {
-    const navigate = useNavigate();
-    const [trackLoggedInuser, setTrackLoggedInUser] = useState('');
+    const [trackLoggedInuser, setTrackLoggedInUser] = useState();
     const options = [
         {
             category: "Select One",
@@ -35,14 +35,13 @@ const LoginForm = () => {
     const handleChange = (e) => {
         e.preventDefault();
         setSelectValue(e.target.value);
-        setFormData(data => ({ ...data, [e.target.name]: e.target.value })); //es2015 computed Property names
+        setFormData(data => ({ ...data, [e.target.name]: e.target.value }));
     }
 
     const user = {
         username: formData.username,
         password: formData.password,
         is_admin: selectValue
-        // is_admin: formData.is_admin
     };
 
     async function handleSubmit(evt){
@@ -50,7 +49,8 @@ const LoginForm = () => {
         const arrayOfAdminUsernames = [];
 
         try{
-            const adminsFromDB = await axios.get('http://localhost:3000/users/admins');
+            const adminsFromDB = await axios.get(RETRIEVE_ADMINS_URL);
+
             for(let admin of adminsFromDB.data){
                 arrayOfAdminUsernames.push(admin.username);
             }
@@ -59,9 +59,8 @@ const LoginForm = () => {
                 if(arrayOfAdminUsernames.includes(user.username)){
                     toast.error('Log in failed! Check user type.');
                 }else{
-                    const response = await axios.post('http://localhost:3000/user/login', user);
-                    toast.success('Successfully Logged in!')
-                    // console.log(response.data.jwt_token) // returns jwt_token, save it to variable
+                    const response = await axios.post(LOGIN_ENDPOINT, user);
+                    toast.success('Successfully Logged in!');
                     if(response.data.jwt_toke){
                         setTrackLoggedInUser(response.data);
                         localStorage.setItem('loggedInUser', response.data);
@@ -69,8 +68,8 @@ const LoginForm = () => {
                 }
             }else if(user.is_admin === 'true'){
                 if(arrayOfAdminUsernames.includes(user.username)){
-                    const response = await axios.post('http://localhost:3000/user/login', user);
-                    toast.success('Successfully Logged in!');
+                    const response = await axios.post(LOGIN_ENDPOINT, user);
+              
                     if(response.data.jwt_token){
                         localStorage.setItem('loggedInUser', JSON.stringify(response.data));
                         setTrackLoggedInUser(response.data);
@@ -93,7 +92,7 @@ const LoginForm = () => {
 
     return (
         <>
-            {trackLoggedInuser ? <div>You are logged in. </div> :
+            {trackLoggedInuser ? <Home /> :
             <div>
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -138,10 +137,10 @@ const LoginForm = () => {
                     </div>
 
                 <button>Log In</button>
-                <ToastContainer />
             </form>
-            </div>
+            </div> 
         }
+        <ToastContainer />
     </>
     )
 }
