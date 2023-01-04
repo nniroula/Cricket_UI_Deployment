@@ -4,14 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
-// import styles from '../stylesheet/GeneralStyle.css';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 
 export const CheckoutForm = () => {
-
     const [product, setProduct] = useState({name: "Size: Medium", price: 40 });
     const priceForStripe = product.price*100;
-    //  token function
+
     const payNow = async token => {
         try{
             const response = await axios({
@@ -23,14 +23,11 @@ export const CheckoutForm = () => {
                 }
             });
             if(response.status === 200){
-                // toast with success message
-                console.log("Payment success")
+                toast.success("Payment success");
             }
 
         }catch(e){
-            // do some react toast with fialed message
-            console.log("NOT SUCCESSFUL");
-            console.log(e)
+            toast.error(`Payment not successful! ${e.message}`);
         }
     }
     const navigate = useNavigate(); 
@@ -47,20 +44,18 @@ export const CheckoutForm = () => {
                 keyboard={false}
             >
             <Modal.Header>
-            <Modal.Title style={{color:'green'}}>Your Purchase is Donation to Us!</Modal.Title>
+            <Modal.Title style={{color:'green'}}>Purchase a jersey, Donate to the AECC!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
             <div style={{ maxWidth: '50vw', minWidth:'20vw', minHeight:'50vh', height: '70vh', 
                 maxHeight: '60vh', marginTop:'1em', padding: '0.5em', marginRight:'1em', borderRadius: '2%', 
                 marginLeft:'1em', backgroundColor: 'rgb(250, 90, 40)', paddingLeft: '10px'}}>
-
-                <p><small style={{marginTop:'-0.7rem', color:'yellow', }}>Your small purchase is a big support for AECC!</small></p>
+                <p><small style={{marginTop:'-0.7rem', color:'yellow', }}>Your small purchase means a big support for the AECC!</small></p>
                 <p style={{color:"Highlight", textAlign:'center',  marginBottom:'0.25px', marginTop:'-1em'}}>
                     {product.name}
                 </p>
                 <div style={{textAlign:'center'}}>
                 <img src={require('../images/aecc_jersey.jpeg')} alt="Jersey logo" style={{height:"16em", width:"12em"}}/>
-
                 </div>
                     <p style={{color:'cyan', textAlign:'center',  marginBottom:'0.25px'}}>
                     <span>Amount:</span>
@@ -81,6 +76,7 @@ export const CheckoutForm = () => {
                     <Button variant="secondary" onClick={handleShow}>Close</Button>
                 </Modal.Footer>
             </Modal>
+            <ToastContainer />
         </div>
     );
 }
