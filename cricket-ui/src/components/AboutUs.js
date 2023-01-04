@@ -25,6 +25,7 @@ const AboutUs = () => {
                 <div className={styles.AboutUsDiv}>
                     <p className={styles.AboutUsContent}>
                         The Aurora Everest Cricket Club (AECC) was founded in July 2020 with the slogan of "Play Cricket, Stay Healthy".
+                        <img className={styles.GroupImage} src={require('../images/aecc_group_photo.jpeg')} alt="players group photo"/> 
                         It was the time of the big wave of the COVID19 pandemic that nation was under lock down and that people were not 
                         comfortable going out in public. Some youths from the city of Aurora in the state of Colorado decided then to play 
                         cricket and stay strong. Three-four youths started practicing it. The number grew up rapidly and now, it is a structered club with good number of members.

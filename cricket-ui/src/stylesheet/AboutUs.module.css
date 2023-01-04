@@ -3,7 +3,19 @@
 }
 
 .AboutUsContent{
-    color: rgb(21, 72, 225)
+    color: rgb(5, 147, 85);
+}
+
+.GroupImage{
+    height: 200px;
+    width: 200px;
+    float:left;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.AboutUsDiv{
+    display: flex;
 }
 
 
