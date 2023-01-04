@@ -1,19 +1,17 @@
-import { RETRIEVE_PLAYERS_URL } from "../components/Constant";
+import { PLAYERS_URL } from "../components/Constant";
 import axios from "axios";
 
 const PlayerValidator = async (player) => {
     const errors = {};
     let playerEMailsInDB = [];
     let phoneInDB = '';
-    const url = RETRIEVE_PLAYERS_URL; 
+    const url = PLAYERS_URL; 
 
     const names_regex = new RegExp("^[a-zA-Z]+$");
     const phone_regex =  new RegExp("^[1-9]\\d{2}-\\d{3}-\\d{4}$");  
     const date_regex = new RegExp("^(1[0-2]|0[1-9])[/](3[01]|[12][0-9]|0[1-9])[/][0-9]{4}$");
     const playing_role_regex = new RegExp("^[a-zA-Z]+([\\s]?[a-zA-Z])*$");
     const emergency_contact_regex = new RegExp("^[a-zA-Z]+([\\s]?[a-zA-Z])*$");
-    // const email_regex = new RegExp("^[\w\.\-]+)@([\w\-]+)((\.(\w){2,6})+)$");
-    // const email_regex = new RegExp("^[\w\.\-]+)@([\w\-]+)((\.(\w){2,6})+)$");
     const email_regex = new RegExp("^([\\w.-]+)@([\\w-]+)((\\.(\\w){2,6})+)$");
 
     await axios.get(url).then((response) => {

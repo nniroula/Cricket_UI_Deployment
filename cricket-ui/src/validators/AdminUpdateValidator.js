@@ -1,24 +1,24 @@
 import { RETRIEVE_ADMINS_URL } from "../components/Constant";
 import axios from "axios";
 import logInTracker from "../components/auth/loginTracker";
+import bcrypt from 'bcryptjs';
 
 const AdminUpdateValidator = async (admin) => {
     const errors = {};
     let adminUsernames = [];
     let adminEMails = [];
-    let adminData = [];
     const loggedInUser = logInTracker();
     let emailOfLoggedInUser = '';
-
-    const url = RETRIEVE_ADMINS_URL;
+    let PasswordOfLoggedInAdmin = '';
+    const URL = RETRIEVE_ADMINS_URL;
+    const URL_FOR_ADMIN_BY_USERNAME = `${URL}/${loggedInUser.username}`;
     const names_regex = new RegExp("^[a-zA-Z]+$");
     const username_regex = new RegExp("^[a-zA-Z]+$|^[a-zA-Z]+[0-9]+$");
     const phone_regex =  new RegExp("^[1-9]\\d{2}-\\d{3}-\\d{4}$");
 
-    await axios.get(url).then((response) => {
+    await axios.get(URL).then((response) => {
         const data = response.data;
         for(let adminUser in data){
-            adminData.push(data[adminUser]);
             let user_name = data[adminUser].username;
             let email_in_db = data[adminUser].email;
             if(data[adminUser].email === admin.email){
@@ -30,8 +30,12 @@ const AdminUpdateValidator = async (admin) => {
             if(user_name === loggedInUser.username){
                 emailOfLoggedInUser = email_in_db;
             }
-     
         }
+    }).catch(error => console.error(error));
+
+    await axios.get(URL_FOR_ADMIN_BY_USERNAME).then((response) => {
+        const data = response.data;
+        PasswordOfLoggedInAdmin = data.password
     }).catch(error => console.error(error));
 
     if(admin.first_name.length < 2){
@@ -63,9 +67,12 @@ const AdminUpdateValidator = async (admin) => {
         errors.email = 'Email is taken! Use a different one.';
     }
 
-    // if(!admin.password){
-    //     errors.password = "Invalid password. Can't update here";
-    // }
+    if(admin.password.length < 6){
+        errors.password = "Minimum length is 6.";
+    }
+    else if(!bcrypt.compareSync(admin.password, PasswordOfLoggedInAdmin)){
+        errors.password = "Invalid password!";
+    }
 
     return errors;
 }

@@ -1,4 +1,4 @@
-import { RETRIEVE_PLAYERS_URL } from "../components/Constant";
+import { PLAYERS_URL } from "../components/Constant";
 import axios from "axios";
 
 
@@ -8,7 +8,7 @@ const PlayerUpdateValidator = async (player) => {
     let phoneInDB = '';
     let allPlayers = [];
   
-    const url = RETRIEVE_PLAYERS_URL; 
+    const url = PLAYERS_URL; 
     const names_regex = new RegExp("^[a-zA-Z]+$");
     const phone_regex =  new RegExp("^[1-9]\\d{2}-\\d{3}-\\d{4}$");
     const date_regex = new RegExp("^(1[0-2]|0[1-9])[/](3[01]|[12][0-9]|0[1-9])[/][0-9]{4}$");
@@ -22,7 +22,6 @@ const PlayerUpdateValidator = async (player) => {
             let email_in_db = data[playerInDB].email;
             if(data[playerInDB].email === player.email){
                 playerEMailsInDB.push(email_in_db);
-                console.log(`Id is ${data[playerInDB].id}`);
             }
             if(data[playerInDB].phone_number === player.phone_number){
                 phoneInDB = data[playerInDB].phone_number;

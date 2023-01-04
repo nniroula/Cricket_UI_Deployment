@@ -1,6 +1,5 @@
 import { RETRIEVE_ADMINS_URL } from "../components/Constant";
 import axios from "axios";
-import logInTracker from "../components/auth/loginTracker";
 
 const AdminValidator = async (admin) => {
     const errors = {};
@@ -54,10 +53,9 @@ const AdminValidator = async (admin) => {
         errors.email = 'Email is taken! Use a different one.';
     }
 
-    // if(!admin.password){
-    //     errors.password = "Invalid password. Can't update here";
-    //     console.log('wrong password');
-    // }
+    if(admin.password.length < 6){
+        errors.password = "Minimum length is 6.";
+    }
 
     return errors;
 }
