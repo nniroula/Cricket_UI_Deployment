@@ -1,10 +1,9 @@
 .Footer {   
-    margin-top: 85vh;
-    height: 40px;
-    bottom: 2;
+    height:50px;
     width: 100%;
     text-align: center;
     color: #f6e4f2;
     background-color: #144012;
-    padding-top: 7px;
+    padding-top: 9px;
+    margin-top: 83vh;
 }

@@ -1,12 +1,9 @@
-.AboutUsModal{
-    background-color:moccasin;
+.ModalTitle{
+    padding-left: 35%;
 }
 
-.ModalTitle{
-    color: green;
-    justify-content: center;
-    margin-left: 10%
-    
+.AboutUsContent{
+    color: rgb(21, 72, 225)
 }
 
 

@@ -7,9 +7,9 @@
     margin-left: 20%;
     text-align: center;
     margin-top: 1em;
-  }
+}
   
-  #PatientText {
+#PatientText {
     border-radius: 3px;
     color: aliceblue;
     font-size: larger;
@@ -19,9 +19,9 @@
     text-align: center;
     margin-top: 1em;
     margin-left: 20px;
-  }
+}
   
-  #HomeText {
+#HomeText {
     border-radius: 3px;
     color: aliceblue;
     font-size: larger;
@@ -30,9 +30,9 @@
     margin-right: 20px;
     text-align: center;
     margin-top: 1em;
-  }
+}
   
-  .Header {
+.Header {
     border-radius: 2px;
     background-color: #144012;
     height: 72px;
@@ -41,17 +41,17 @@
     position: sticky;
     top: 0;
     z-index: 3;
-  }
+}
   
-  .homePageContent {
+.homePageContent {
     font-size: small;
     text-align: center;
     padding-top: 50px;
-  }
+}
   
-  #LinkText {
+#LinkText {
     font-size: large;
     text-align: center;
     padding: 25px;
     margin-top: 50px;
-  }
+}
