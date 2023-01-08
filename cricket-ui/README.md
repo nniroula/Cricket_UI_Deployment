@@ -1,4 +1,57 @@
-# Getting Started with Create React App
+# User Interface for the cricket club's API(Backend)
+
+### Deployment
+User Interface: ```https://aecc.herokuapp.com```. Click [Here](https://aecc.herokuapp.com) to access it.<br>
+It's backend is available at the 
+Site: ```https://aecc-api.herokuapp.com``` 
+
+
+<br>
+
+### Description  
+The current focus of the project is to create a desktop web app for the sports club, and the stretch goal is to extend it be accessed on mobile/smart phones as well. The project involves creating an own API as well as using an external one.<br> <br>This Sports club's website is a ```Fullstack RESTful Web App```. The major technologies used in this project are ```NodeJS, ExpressJS, SQL, and PostgreSQL``` for creating an API(backend), along with ```HTML5 and CSS``` for the frontend in combination with a frontend ```JavaScript``` framework called ```ReactJS```. For the deployment of this project, website hosting site named ```Heroku``` is used. <br>
+
+<br>
+
+### User Access/Flow
+#### Admin Users: 
+- Note: You cannot sign up yourself. One admin user has to create another admin user. You cannot delete yourself. One admin user can delete another admin user.
+- Once you are loggedin, you will be directed to home page. Click on the menu bar icon to access more functionalities. 
+- - If you click on admins, players, or games in the menu list, You will be shown a button that displays either view admins, view players, or view games. Click on that button, it will render a modal respective to what you wanted to look into. For example, if you click on view admins button, it will render a modal that displays a table containing list of admins. There you will see pencil or trash can icon. If you click on the pencil Icon, you can update your own information. As an admin, you are not allow to update another admin's information. Clicking on trash icon would delete an admin, but you cannot delete yourself. You will also, see new admin button on the top of the table. If you click on that button, it will let you create new admin. Similar approach applies to accessing, creating, and updating games and players.
+- Once you log out, the navigation link will change to sign up and log in. But menu icon stays unchanged.
+
+<br>
+
+#### General Users:
+- Note: You can sign up to create an account, but this feature is nothing more than that currently.
+- Click on Menu Icon at the far right top corner, it opens up the menu list links. Click on any one you want ot explore.
+- If you click on Games, it will render a button that says View Games. If you click on it, it will display the game in the tabular form. And the same applies with Admins and Players.
+
+
+
+<br>
+
+### External Dependencies
+User Interface: ```https://aecc-api.herokuapp.com```. Click [Here](https://aecc-api.herokuapp.com) to access it.
+
+<br>
+
+### Simulation Steps
+
+#### 1. Initial Project Setup
+- Clone the project ```git clone this project's GitHub Repo url```.
+- ```npm install``` -> this installs all the dependencies.
+
+<br>
+
+#### 2. Running Test files
+
+
+<br>
+<br>
+<br>
+
+### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
