@@ -23,10 +23,9 @@ export const CheckoutForm = () => {
                     token
                 }
             });
-            if(response.status === 200){
+            if(response.status == 200){
                 toast.success("Payment success");
-            }
-
+            }  
         }catch(e){
             toast.error(`Payment not successful! ${e.message}`);
         }
