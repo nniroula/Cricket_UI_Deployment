@@ -4,6 +4,8 @@ import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';   
 import Home from '../Home';
 import { RETRIEVE_ADMINS_URL, LOGIN_ENDPOINT } from '../Constant';
+import styles from '../../stylesheet/Login.module.css';
+import classNames from 'classnames'
 
 
 const LoginForm = () => {
@@ -93,25 +95,23 @@ const LoginForm = () => {
     return (
         <>
             {trackLoggedInuser ? <Home /> :
-            <div>
+            <div className={styles.LoginForm}>
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="username">Username</label>
+                    <div className={styles.LoginFormContent}>
+                        <label htmlFor="username" className={classNames(styles.Labels, styles.UsernameLabel)}>Username</label>
                         <input type="text" 
                             id="username" 
-                            placeholder="Your name" 
+                            placeholder="Your username" 
                             value={formData.username} 
                             name="username" 
                             onChange={handleChange} 
                             required
                         />
-                        <div style={{ color: 'red', marginBottom : '0.7em'}}>
-        
-                        </div>
+                        <div style={{ color: 'red', marginBottom : '0.7em'}}> </div>
                     </div>
 
-                    <div>
-                        <label htmlFor="password">Password</label>
+                    <div className={styles.LoginFormContent}>
+                        <label htmlFor="password" className={styles.Labels}>Password</label>
                         <input type="password" 
                             id="password" 
                             placeholder="Enter your password" 
@@ -123,8 +123,8 @@ const LoginForm = () => {
                         <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
                     </div>
 
-                    <div>
-                        <label htmlFor="userType">User type</label>
+                    <div className={styles.LoginFormContent}>
+                        <label htmlFor="userType" className={styles.Labels}>User type</label>
                         <select name="is_admin" onChange={handleChange} >
                             {options.map((option) =>(
                                 <option value={option.value} name={option.category} 
@@ -136,7 +136,7 @@ const LoginForm = () => {
                         <div style={{ color: 'red', marginBottom : '0.7em'}}></div>
                     </div>
 
-                <button>Log In</button>
+                <button className={styles.LoginButton}>Log In</button>
             </form>
             </div> 
         }

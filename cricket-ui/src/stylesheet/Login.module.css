@@ -1,0 +1,24 @@
+.LoginForm{
+    margin-top: 30px;
+    float: right;
+}
+
+.Labels{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color:blue;
+    font-weight: 550;
+    margin-right: 8px;
+    text-align: center;
+}
+
+.LoginFormContent{
+    text-align: left;
+}
+
+.LoginButton{
+    float: right;
+    background-color: chartreuse;
+}
+.UsernameLabel{
+    margin-right: 3px;
+}
