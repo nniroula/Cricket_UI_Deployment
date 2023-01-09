@@ -15,7 +15,8 @@ export const CheckoutForm = () => {
     const payNow = async token => {
         try{
             const response = await axios({
-                url: 'http://localhost:3000/stripe/payment',
+                // url: 'http://localhost:3000/stripe/payment', // To run locally
+                url: `https://aecc-api.herokuapp.com/stripe/payment`,
                 method:'post',
                 data: {
                     amount: product.price*100,
