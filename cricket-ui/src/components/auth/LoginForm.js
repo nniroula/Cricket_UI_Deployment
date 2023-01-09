@@ -5,10 +5,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import Home from '../Home';
 import { RETRIEVE_ADMINS_URL, LOGIN_ENDPOINT } from '../Constant';
 import styles from '../../stylesheet/Login.module.css';
-import classNames from 'classnames'
+import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     const [trackLoggedInuser, setTrackLoggedInUser] = useState();
     const options = [
         {
@@ -85,6 +87,10 @@ const LoginForm = () => {
         }
     }
 
+    const handleCancel = () => {
+        navigate('/');
+    }
+
     useEffect(() => {
         const signedInUser = localStorage.getItem('loggedInUser');
         if (signedInUser) {
@@ -138,6 +144,7 @@ const LoginForm = () => {
 
                 <button className={styles.LoginButton}>Log In</button>
             </form>
+            <button onClick={handleCancel} className={styles.CancelButtons}>Cancel</button>
             </div> 
         }
         <ToastContainer />

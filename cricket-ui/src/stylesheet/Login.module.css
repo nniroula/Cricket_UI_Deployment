@@ -5,10 +5,10 @@
 
 .Labels{
     font-family: Georgia, 'Times New Roman', Times, serif;
-    color:blue;
     font-weight: 550;
     margin-right: 8px;
     text-align: center;
+    color:honeydew
 }
 
 .LoginFormContent{
@@ -21,4 +21,21 @@
 }
 .UsernameLabel{
     margin-right: 3px;
+}
+.UserEmail{
+    margin-right: 40px;
+}
+
+.UserPhone{
+    margin-right: 38px;
+}
+
+.SignUpFirstName{
+    margin-right: 5px;
+}
+
+.CancelButtons{
+    background-color: orange;
+    float: right;
+    margin-right: 5px;
 }
