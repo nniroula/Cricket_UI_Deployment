@@ -1,17 +1,17 @@
-# User Interface for the cricket club's API(Backend)
-
-### Deployment
-User Interface: ```https://aecc.herokuapp.com```. Click [Here](https://aecc.herokuapp.com) to access it.<br>
-It's backend is available at the 
-Site: ```https://aecc-api.herokuapp.com``` 
-
-
-<br>
+## User Interface for the cricket club's API(Backend)
 
 ### Description  
 The current focus of the project is to create a desktop web app for the sports club, and the stretch goal is to extend it be accessed on mobile/smart phones as well. The project involves creating an own API as well as using an external one.<br> <br>This Sports club's website is a ```Fullstack RESTful Web App```. The major technologies used in this project are ```NodeJS, ExpressJS, SQL, and PostgreSQL``` for creating an API(backend), along with ```HTML5 and CSS``` for the frontend in combination with a frontend ```JavaScript``` framework called ```ReactJS```. For the deployment of this project, website hosting site named ```Heroku``` is used. <br>
 
 <br>
+
+### Deployment
+User Interface: ```https://aecc.herokuapp.com```. Click [Here](https://aecc.herokuapp.com) to access it.<br>
+It's backend is available at the Site: ```https://aecc-api.herokuapp.com```
+
+<br>
+
+
 
 ### User Access/Flow
 #### Admin Users: 
@@ -27,7 +27,13 @@ The current focus of the project is to create a desktop web app for the sports c
 - Click on Menu Icon at the far right top corner, it opens up the menu list links. Click on any one you want ot explore.
 - If you click on Games, it will render a button that says View Games. If you click on it, it will display the game in the tabular form. And the same applies with Admins and Players.
 
+<br>
 
+### Payment Processing
+- If you would like to test how the payment process would work, use the following information <br>
+- - Card Number: 4242 4242 4242 4242
+- - Exp 4/24
+- - CVV 242
 
 <br>
 
