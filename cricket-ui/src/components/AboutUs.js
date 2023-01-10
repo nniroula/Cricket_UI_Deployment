@@ -17,7 +17,7 @@ const AboutUs = () => {
                 <Modal.Header className={styles.AboutUsModal}>
                 <Modal.Title className={styles.ModalTitle}> 
                     <div style={{textAlign:'center'}}>
-                        <img src={require('../images/AECC_LOGO.png')} alt="Jersey logo" style={{height:"5.5em", width:"5em"}}/>
+                        <img src={require('../images/AECC_LOGO.png')} alt="Club Logo" style={{height:"5.5em", width:"5em"}}/>
                     </div>
                 </Modal.Title>
                 </Modal.Header>
