@@ -28,19 +28,21 @@ const NavLinks = () => {
                     <span className={styles.SignUp}> <NavLink className={styles.SigningService} to="/signup">Sign Up</NavLink> </span>
                     <span> <NavLink className={styles.SigningService} to="/login">Log In</NavLink> </span>
                 </span>
-             }
-            <div className={styles.Menu} onClick={buttonToggle}> {navbarOpen ? 
-                <div className={styles.MenuContent}>
-                    <MenuIcon />
+            }
+            <span className={styles.Menu} onClick={buttonToggle}> {navbarOpen ? 
+                <span>
+                    <MenuIcon /> 
+                    <div className={styles.DisplayMenuItemsDiv} >
                     <div><NavLink className={styles.MenuItems} to="/fetchGames">Games</NavLink> </div>
                     <div><NavLink className={styles.MenuItems} to="/fetchPlayers">Players</NavLink> </div>
                      <div><NavLink className={styles.MenuItems} to="/fetchAdmins">Admins</NavLink> </div>
                      <div><NavLink className={styles.MenuItems} to="/aboutUs"> About Us </NavLink></div>
                     <div><NavLink className={styles.MenuItems} to="/contactUs"> Contact Us </NavLink></div>
                     <div><NavLink className={styles.MenuItems} to="/donation"> Donate </NavLink></div>  
-                </div>
+                    </div>
+                </span>
                 : <MenuIcon />}
-            </div>
+            </span>
         </div>
     );
 }

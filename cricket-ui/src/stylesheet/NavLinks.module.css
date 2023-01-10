@@ -6,6 +6,7 @@
 .Menu{
     display: contents;
     color: aqua;
+    padding-top: 1.5em;
 }
 .Authentication{
     margin-right: 1.3rem;
@@ -15,9 +16,15 @@
 }
 .SigningService{
     color:greenyellow;
-    display: contents;
+    display: contents; 
 }
 .MenuItems{
     display: contents;
     color: white;
+}
+
+.DisplayMenuItemsDiv{
+    padding-top: 30px;
+    text-align: left;
+    padding-left: 80px;
 }
