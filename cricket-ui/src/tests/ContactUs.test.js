@@ -26,3 +26,13 @@ test('it should render the content', () => {
     </BrowserRouter>
 })
 
+// Snapshot test 
+test("it matches snapshot", () => {
+    const {asFragment} =  render(
+    <BrowserRouter>
+       <ContactUs />;
+    </BrowserRouter>
+    )
+    expect(asFragment()).toMatchSnapshot();
+})
+

@@ -6,7 +6,7 @@ import NavLinks from "../components/NavLinks";
 test('NavLinks page should render without crashing', () => {
     render(
         <BrowserRouter>
-          <NavLinks />
+            <NavLinks />
         </BrowserRouter>,
       );      
 });
