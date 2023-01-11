@@ -51,6 +51,13 @@ User Interface: ```https://aecc-api.herokuapp.com```. Click [Here](https://aecc-
 <br>
 
 #### 2. Running Test files
+- The project uses React Testing Library. It is inbuilt module in create react app. Use the following to run the test:
+- - npm test, npm run test, OR
+- - npm test -- --coverage (OR npm test -- --coverage testFileName.js)
+- - q to quit the test
+
+- - NOTE: if the Snapshot test fails, rerun the test and update the Snapshot test
+- - Smoke test tests if the component is rendered correctly, and Snapshot test tests if rerendering changed anything.
 
 
 <br>
