@@ -1,5 +1,4 @@
-const BCRYPT_WORK_FACTOR = 12;
-// BCRYPT_WORK_FACTOR = process.env.BCRYPT_WORK_FACTOR;
+const BCRYPT_WORK_FACTOR = process.env.PASS_WORK_FACTOR;
 // const BASE_URL = 'http://localhost:3000';
 // const GAMES_ENDPOINT = `${BASE_URL}/games`;
 // const RETRIEVE_ADMINS_URL = `${BASE_URL}/users/admins`;
