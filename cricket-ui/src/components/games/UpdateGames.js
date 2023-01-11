@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import GamesValidator from '../../validators/GamesValidator';
 import { GAMES_ENDPOINT } from '../Constant';
-import logInTracker from '../auth/loginTracker';
+import LogInTracker from '../auth/LoginTracker';
 import styles from '../../stylesheet/Games.module.css';
 
 const UpdateGames = ({gameToBeUpdated}) => {
@@ -16,14 +16,14 @@ const UpdateGames = ({gameToBeUpdated}) => {
         venue: gameToBeUpdated.venue,
         opposition_team: gameToBeUpdated.opposition_team,
         game_time: gameToBeUpdated.game_time,
-        jwt_token:logInTracker().jwt_token
+        jwt_token:LogInTracker().jwt_token
     };
 
     const [formData, setFormData] = useState({EXISTING_FORM_DATA});
   
     async function handleSubmit(evt){
         evt.preventDefault();
-        const loggedInCredentials = logInTracker();
+        const loggedInCredentials = LogInTracker();
         let newDate = '';
         let newVenue = '';
         let newOppositionTeam = '';

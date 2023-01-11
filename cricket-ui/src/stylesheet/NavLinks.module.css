@@ -14,6 +14,9 @@
 .SignUp{
     margin-right: 0.5em;
 }
+.Logout{
+    margin-right: 1em;
+}
 .SigningService{
     color:greenyellow;
     display: contents; 
@@ -22,9 +25,10 @@
     display: contents;
     color: white;
 }
-
 .DisplayMenuItemsDiv{
     padding-top: 30px;
     text-align: left;
     padding-left: 80px;
 }
+
+

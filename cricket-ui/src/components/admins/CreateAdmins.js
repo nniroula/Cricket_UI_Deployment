@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CurrentDate from '../../validators/DateValidator';
 import { CREATE_ADMIN_ENDPOINT } from '../Constant';
-import logInTracker from '../auth/loginTracker';
+import logInTracker from '../auth/LoginTracker';
 import AdminValidator from '../../validators/AdminValidator';
 import styles from '../../stylesheet/Admins.module.css';
 

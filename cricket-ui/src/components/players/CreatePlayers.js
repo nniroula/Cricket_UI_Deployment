@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CurrentDate from '../../validators/DateValidator';
 import { PLAYERS_URL } from '../Constant';
-import logInTracker from '../auth/loginTracker';
+import LogInTracker from '../auth/LoginTracker';
 import PlayerValidator from '../../validators/PlayerValidator';
 import styles from '../../stylesheet/Players.module.css';
 
@@ -13,7 +13,7 @@ const CreatePlayers = () => {
     const [hasAnyInputError, setHasAnyInputError] = useState(false);
     const [inputError, setInputError] = useState({});
     const today = CurrentDate();
-    const loggedInAdmin = logInTracker();
+    const loggedInAdmin = LogInTracker();
    
     const INITIAL_FORM_DATA = {
         first_name: '',

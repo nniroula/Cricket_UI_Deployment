@@ -1,13 +1,13 @@
 import { RETRIEVE_ADMINS_URL } from "../components/Constant";
 import axios from "axios";
-import logInTracker from "../components/auth/loginTracker";
+import LogInTracker from "../components/auth/LoginTracker";
 import bcrypt from 'bcryptjs';
 
 const AdminUpdateValidator = async (admin) => {
     const errors = {};
     let adminUsernames = [];
     let adminEMails = [];
-    const loggedInUser = logInTracker();
+    const loggedInUser = LogInTracker();
     let emailOfLoggedInUser = '';
     let PasswordOfLoggedInAdmin = '';
     const URL = RETRIEVE_ADMINS_URL;

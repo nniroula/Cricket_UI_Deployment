@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
-import logInTracker from '../auth/loginTracker';
+import LogInTracker from '../auth/LoginTracker';
 import CreateAdmin from './CreateAdmins';
 import { CREATE_ADMIN_ENDPOINT } from '../Constant';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -19,7 +19,7 @@ const DisplayAdmins = ({ admins, clicked }) => {
     const [adminCreated, setAdminCreated] = useState(false);
     const [adminUpdated, setAdminUpdated] = useState(false);
     const [adminToBeUpdated, setAdminToBeUpdate] = useState({});
-    const signedInUser = logInTracker();
+    const signedInUser = LogInTracker();
     let isSignedIn = false;
 
     if(signedInUser != undefined){

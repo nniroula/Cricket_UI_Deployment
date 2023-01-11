@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
-import logInTracker from '../auth/loginTracker';
+import LogInTracker from '../auth/LoginTracker';
 import CreatePlayers from './CreatePlayers';
 import { PLAYERS_URL } from '../Constant';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -29,7 +29,7 @@ const DisplayPlayers = ({ players, clicked }) => {
     }
 
     let isSignedIn = false;
-    const signedInUser = logInTracker();
+    const signedInUser = LogInTracker();
   
     if(signedInUser != undefined){
         isSignedIn = signedInUser.is_admin;

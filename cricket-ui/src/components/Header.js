@@ -12,4 +12,5 @@ const Header = () => (
     <NavLinks />
   </div>
 );
+
 export default Header;

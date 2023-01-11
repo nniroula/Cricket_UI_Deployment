@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AdminUpdateValidator from '../../validators/AdminUpdateValidator';
 import { CREATE_ADMIN_ENDPOINT } from '../Constant';
-import logInTracker from '../auth/loginTracker';
+import LogInTracker from '../auth/LoginTracker';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import styles from '../../stylesheet/Admins.module.css';
@@ -30,7 +30,7 @@ const UpdateAdmins = ({adminToBeUpdated}) => {
   
     async function handleSubmit(evt){
         evt.preventDefault();
-        const loggedInCredentials = logInTracker();
+        const loggedInCredentials = LogInTracker();
         let newFirstName = '';
         let newLastName = '';
         let newUserName = '';

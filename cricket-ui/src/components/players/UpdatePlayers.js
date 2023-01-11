@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PlayerUpdateValidator from '../../validators/PlayerUpdateValidator';
 import { PLAYERS_URL } from '../Constant';
-import logInTracker from '../auth/loginTracker';
+import LogInTracker from '../auth/LoginTracker';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import styles from '../../stylesheet/Players.module.css';
@@ -13,7 +13,7 @@ const UpdatePlayers = ({playerToBeUpdated}) => {
     const navigate = useNavigate();
     const [hasAnyInputError, setHasAnyInputError] = useState(false);
     const [inputError, setInputError] = useState({});
-    const loggedInAdmin = logInTracker(); 
+    const loggedInAdmin = LogInTracker(); 
    
     const EXISTING_FORM_DATA  = {
         first_name: playerToBeUpdated.first_name,

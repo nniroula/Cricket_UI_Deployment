@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
-import logInTracker from '../auth/loginTracker';
+import LogInTracker from '../auth/LoginTracker';
 import CreateGames from './CreateGames';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -20,7 +20,7 @@ const DisplayGames = ({ games, clicked }) => {
     const [gameCreated, setGameCreated] = useState(false);
     const [gameUpdated, setGameUpdated] = useState(false);
     const [gameToBeUpdated, setGameToBeUpdate] = useState({});
-    const signedInUser = logInTracker();
+    const signedInUser = LogInTracker();
     let isSignedIn = false;
     const matches = [];
 

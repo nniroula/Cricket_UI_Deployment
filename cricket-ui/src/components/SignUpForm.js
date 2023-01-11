@@ -57,7 +57,6 @@ const SignUpForm = () => {
                 await axios.post(SIGN_UP_ENDPOINT , user);
                 navigate('/login');
             }catch(e){
-                console.log(e);
                 console.log(e.response.data.message);
             }
         }
