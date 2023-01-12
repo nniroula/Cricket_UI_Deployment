@@ -6,7 +6,7 @@ The current focus of the project is to create a desktop web app for the sports c
 <br>
 
 ### Deployment
-User Interface: ```https://aecc.herokuapp.com```. Click [Here](https://cricketaecc.herokuapp.com) to access it.<br>
+User Interface: ```https://cricketaecc.herokuapp.com```. Click [Here](https://cricketaecc.herokuapp.com) to access it.<br>
 It's backend is available at the Site: ```https://aecc-api.herokuapp.com```
 
 <br>
